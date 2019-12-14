@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Codejobs</title>
+    <title>CodeJobs</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,8 @@
   </head>
 
   <body>
-    <%= yield %>
+    <p class="notice"><%= notice %></p><br/>
+    <p class="alert"><%= alert %></p><br/>
+    <%= yield %><br/>
   </body>
 </html>

@@ -1,0 +1,10 @@
+<h1>CodeJobs</h1>
+
+<% if headhunter_signed_in? %>
+  <%= link_to 'Sair', destroy_headhunter_session_path, method: :delete %>
+<% elsif candidate_signed_in? %> 
+  <%= link_to 'Sair', destroy_candidate_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Sou Recrutador', headhunter_session_path %><br/>
+  <%= link_to 'Sou Candidato', candidate_session_path %> <br/>
+<% end %>
