@@ -12,7 +12,7 @@ feature 'Candidate create account' do
     click_on 'Cadastrar'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Welcome! You have signed up successfully.')
+    expect(page).to have_content('Bem vindo! Sua conta foi criada com sucesso. Complete seu perfil para começar a se candidatar :)')
     expect(page).not_to have_link('Sou Recrutador')
     expect(page).not_to have_link('Sou Candidato')
     expect(page).to have_content('Sair')

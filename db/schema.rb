@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_170726) do
+ActiveRecord::Schema.define(version: 2019_12_14_215219) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2019_12_14_170726) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.date "birthday"
+    t.string "scholarity"
+    t.string "work_experience"
+    t.string "job_interest"
     t.index ["email"], name: "index_candidates_on_email", unique: true
     t.index ["reset_password_token"], name: "index_candidates_on_reset_password_token", unique: true
   end

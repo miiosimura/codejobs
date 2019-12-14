@@ -1,0 +1,30 @@
+<%= form_with model: @candidate, local: true do |f| %>
+  <div class="field">
+    <%= f.label :name, 'Nome' %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthday, 'Data de Nascimento' %><br />
+    <%= f.date_field :birthday %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :scholarity, 'Escolaridade' %><br />
+    <%= f.text_field :scholarity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :work_experience, 'Experiência Profissional' %><br />
+    <%= f.text_field :work_experience %>
+  </div>
+
+  <div class="field">
+    <%= f.label :job_interest, 'Vagas de Interesse' %><br />
+    <%= f.text_field :job_interest %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Completar Perfil" %>
+  </div>
+<% end %>
