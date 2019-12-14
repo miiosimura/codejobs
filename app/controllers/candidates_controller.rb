@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
   def profile
-    
+    @candidate = current_candidate
   end
   
   def update_profile
