@@ -1,3 +1,9 @@
+<% if @candidate.errors.any? %>
+    <% @candidate.errors.full_messages.each do |message| %>
+      <%= message %><br/>
+    <% end %>
+<% end %>
+
 <%= form_with model: @candidate, local: true do |f| %>
   <div class="field">
     <%= f.label :name, 'Nome' %><br />

@@ -12,12 +12,13 @@ feature 'Candidate create account' do
     click_on 'Cadastrar'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Bem vindo! Sua conta foi criada com sucesso. Complete seu perfil para começar a se candidatar :)')
+    expect(page).to have_content('Bem vindo! Sua conta foi criada com sucesso.')
+    expect(page).to have_content('Complete seu perfil para começar a se candidatar :)')
     expect(page).not_to have_link('Sou Recrutador')
     expect(page).not_to have_link('Sou Candidato')
     expect(page).to have_content('Sair')
   end
-
+  
   scenario 'and email must be unique' do
     Candidate.create!(email: 'email@email.com', password: '123456')
     
