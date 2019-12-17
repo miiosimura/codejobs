@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_215219) do
+ActiveRecord::Schema.define(version: 2019_12_17_005004) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -39,6 +39,22 @@ ActiveRecord::Schema.define(version: 2019_12_14_215219) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.integer "headhunter_id"
+    t.string "title"
+    t.string "job_description"
+    t.string "skills_description"
+    t.decimal "salary_min"
+    t.decimal "salary_max"
+    t.string "job_level"
+    t.date "subscription_date"
+    t.string "city"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["headhunter_id"], name: "index_jobs_on_headhunter_id"
   end
 
 end

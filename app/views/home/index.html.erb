@@ -1,6 +1,7 @@
 <h1>CodeJobs</h1>
 
 <% if headhunter_signed_in? %>
+  <%= render 'headhunters/shared/menu' %><br/>
   <%= link_to 'Sair', destroy_headhunter_session_path, method: :delete %>
 
 <% elsif candidate_signed_in? %>
