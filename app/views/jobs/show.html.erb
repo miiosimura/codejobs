@@ -1,0 +1,8 @@
+<h1><%= @job.title %></h1>
+<p><b>Descrição: </b><%= @job.job_description %></p><br/>
+<p><b>Habilidades desejadas: </b><%= @job.skills_description %></p><br/>
+<p><b>Faixa Salarial: </b>De R$ <%= @job.salary_min %> até R$ <%= @job.salary_max %></p><br/>
+<p><b>Nivel: </b><%= @job.job_level %></p><br/>
+<p><b>Data limite para inscrições: </b><%= @job.subscription_date %></p><br/>
+<p><b>Local de Trabalho: </b><%= @job.city %></p><br/>
+<%= link_to 'Voltar', root_path %><br/>

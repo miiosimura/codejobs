@@ -1,4 +1,11 @@
-<%= form_with model: @jobs, local: true do |j| %>
+<% if @job.errors.any? %>
+    <% @job.errors.full_messages.each do |message| %>
+      <%= message %><br/>
+    <% end %>
+<% end %>
+
+
+<%= form_with model: @job, local: true do |j| %>
   <%= j.label :title, 'Titulo da vaga' %>
   <%= j.text_field :title %>
 
@@ -8,10 +15,10 @@
   <%= j.label :skills_description, 'Habilidades desejadas' %>
   <%= j.text_area(:skills_description, size: "24x6") %>
 
-  <%= j.label :salary_min, 'Faixa Salarial de ' %>
+  <%= j.label :salary_min, 'Faixa Salarial de' %>
   <%= j.number_field :salary_min %>
 
-  <%= j.label :salary_max, 'até ' %>
+  <%= j.label :salary_max, 'até' %>
   <%= j.number_field :salary_max %>
 
   <%= j.label :job_level, 'Nível da vaga' %>
@@ -23,5 +30,5 @@
   <%= j.label :city, 'Região do local de Trabalho' %>
   <%= j.text_field :city %>
 
-
+  <%= j.submit 'Cadastrar' %>
 <% end %>

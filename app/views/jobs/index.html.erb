@@ -1,0 +1,9 @@
+<%= link_to 'Cadastrar Vaga', new_job_path %><br/><br/>
+
+<% if @jobs.empty? %>
+  <p>Você ainda não cadastrou nenhuma vaga :(</p>
+<% end %>
+
+<% @jobs.each do |job| %>
+  <%= link_to job.title, job_path(job) %><br/>
+<% end %>
