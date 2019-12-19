@@ -1,0 +1,10 @@
+<% if @jobs.count > 0 %>
+  <%= @jobs.count %> resultado(s) encontrados<br/><br/>
+
+  <% @jobs.each do |job| %>
+    <%= link_to job.title, job_path(job) %><br/>
+  <% end %>
+
+<% else %>
+  <p>Nenhum resultado foi encontrado</p>
+<% end %>

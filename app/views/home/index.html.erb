@@ -2,14 +2,19 @@
 
 <% if headhunter_signed_in? %>
   <%= render 'headhunters/shared/menu' %><br/>
-  <%= link_to 'Sair', destroy_headhunter_session_path, method: :delete %>
 
 <% elsif candidate_signed_in? %>
   <%= current_candidate.verify_profile_fields? %><br/>
-  <%= render "candidates/shared/menu" %><br/>
-  <%= link_to 'Sair', destroy_candidate_session_path, method: :delete %>
+  <%= render "candidates/shared/menu" %><br/><br/>
+  
+  <%= form_with url: search_jobs_path, local: true, method: :get do %>
+    <%= label_tag :q, 'Bora se candidatar?' %><br/>
+    <%= text_field_tag :q %><br/>
+    <%= submit_tag 'Buscar Vagas' %><br/>
+  <% end %>  
 
 <% else %>
+  <h3>Olá visitante! Cadastre-se para poder buscar e se candidatar as nossas vagas</h3>
   <%= link_to 'Sou Recrutador', headhunter_session_path %><br/>
   <%= link_to 'Sou Candidato', candidate_session_path %> <br/>
 <% end %>

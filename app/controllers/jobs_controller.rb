@@ -22,4 +22,11 @@ class JobsController < ApplicationController
       render :new
     end
   end
+
+  def search
+    if params[:q].length > 1
+      @jobs = Job.where('title like ?', "%#{params[:q]}%")
+      render :search
+    end
+  end
 end

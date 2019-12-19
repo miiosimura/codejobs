@@ -29,5 +29,48 @@ feature 'Headhunter create a job' do
     expect(page).to have_link('Voltar')
   end
 
-  #TODO fazer teste que verifica data e faixa de salarios
+  scenario 'and insert invalid subscription date' do
+    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    
+    login_as(headhunter, scope: :headhunter)
+    visit root_path
+    click_on 'Cadastrar Vaga'
+
+    fill_in 'Data limite para inscrições', with: '2019-01-01'
+    click_on 'Cadastrar'
+
+    expect(page).to have_content('Subscription date inválida.')
+  end
+
+  scenario 'and salary max is less than salary min' do
+    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    
+    login_as(headhunter, scope: :headhunter)
+    visit root_path
+    click_on 'Cadastrar Vaga'
+
+    fill_in 'Faixa Salarial de', with: '4000'
+    fill_in 'até', with: '2000'
+    click_on 'Cadastrar'
+
+    expect(page).to have_content('Salary max deve ser maior que Salary min')
+  end
+
+  scenario 'and some field went blank' do
+    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    
+    login_as(headhunter, scope: :headhunter)
+    visit root_path
+    click_on 'Cadastrar Vaga'
+
+    click_on 'Cadastrar'
+
+    expect(page).to have_content('Title não pode ser em branco')
+    expect(page).to have_content('Job description não pode ser em branco')
+    expect(page).to have_content('Skills description não pode ser em branco')
+    expect(page).to have_content('Salary max não pode ser em branco')
+    expect(page).to have_content('Salary min não pode ser em branco')
+    expect(page).to have_content('Subscription date não pode ser em branco')
+    expect(page).to have_content('City não pode ser em branco')
+  end
 end

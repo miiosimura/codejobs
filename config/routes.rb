@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   devise_for :headhunters
   root to: 'home#index'
   resources :candidates
-  resources :jobs
+  resources :jobs do
+    get 'search', on: :collection
+  end
 end
