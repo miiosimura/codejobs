@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
   belongs_to :headhunter
+  has_many :subscriptions
 
   validates :title, :job_description, :skills_description, :salary_min, :salary_max, :job_level, :subscription_date, :city, presence: {message: 'não pode ser em branco'}
 

@@ -4,7 +4,12 @@
   <%= render 'headhunters/shared/menu' %><br/>
 
 <% elsif candidate_signed_in? %>
-  <%= current_candidate.verify_profile_fields? %><br/>
+  <% if current_candidate.verified_profile? %>
+    Oba! Você está pronto para se candidatar! :D<br/>
+  <% else %>
+    Complete seu perfil para começar a se candidatar :)<br/>
+  <% end %>
+
   <%= render "candidates/shared/menu" %><br/><br/>
   
   <%= form_with url: search_jobs_path, local: true, method: :get do %>

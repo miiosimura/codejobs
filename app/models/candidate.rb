@@ -4,14 +4,13 @@ class Candidate < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :subscriptions
+
+
   validate :verify_valid_birthday, if: :birthday
 
-  def verify_profile_fields?
-    if !(name.blank? || birthday.blank? || scholarity.blank? || work_experience.blank? || job_interest.blank?)
-      'Oba! Você está pronto para se candidatar! :D'
-    else
-      'Complete seu perfil para começar a se candidatar :)'
-    end
+  def verified_profile?
+    !(name.blank? || birthday.blank? || scholarity.blank? || work_experience.blank? || job_interest.blank?)
   end
 
   def verify_valid_birthday

@@ -1,7 +1,7 @@
 <h1>Minhas Vagas</h1>
 
-
-<%= @subscriptions.job.title %>
-
-
+<% @subscriptions.each do |subscription| %>
+  <%= link_to subscription.job.title, job_path(subscription.job.id) %><br/>
+<% end %>
+<br/>
 <%= link_to 'Voltar', root_path %>

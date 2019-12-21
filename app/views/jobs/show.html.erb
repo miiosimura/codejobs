@@ -6,11 +6,29 @@
 <p><b>Data limite para inscrições: </b><%= @job.subscription_date %></p><br/>
 <p><b>Local de Trabalho: </b><%= @job.city %></p><br/>
 
+<hr>
+
 <% if candidate_signed_in? %>
-  <%= link_to 'Candidatar-se', new_subscription_path, param: @job.id %><br/>
-
-<% elsif headhunter_signed_in? %>
-  <%# <%= link_to 'Editar', edit_job_path %><br/> 
-  <%= link_to 'Voltar', root_path %><br/>
-
+  <% if current_candidate.verified_profile? %>
+    <% if @subscription.any? %>
+      Você ja se candidatou. Aguarde o retorno do Recrutador
+    <% else %>
+      <%= link_to 'Candidatar-se', new_job_subscription_path(@job) %><br/>
+    <% end %>
+  <% else %>
+    <%= link_to 'Candidatar-se', edit_candidate_path(current_candidate) %><br/>
+  <% end %>
 <% end %>
+
+<% if headhunter_signed_in? %>
+  <%# <%= link_to 'Editar', edit_job_path %><br/>
+  <h2>Inscritos na vaga</h2>
+
+  <% @job.subscriptions.each do |subscription| %>
+    <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id) %></h3>
+    <b>Sobre o candidato:</b> <%= subscription.about_candidate %><br/>
+  <% end %>
+<% end %>
+
+<br/><br/>
+<%= link_to 'Voltar', root_path %><br/>

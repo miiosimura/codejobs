@@ -10,8 +10,8 @@ feature 'Candidate search a job' do
     login_as(candidate, scope: :candidate)
     visit root_path
     
-    fill_in 'Bora se candidatar?', with: 'Ruby'
-    click_on 'Buscar Vagas'
+    fill_in 'Buscar Vagas', with: 'Ruby'
+    click_on 'Buscar'
   
     expect(page).to have_link(job.title)
     expect(page).not_to have_link(other_job.title)
