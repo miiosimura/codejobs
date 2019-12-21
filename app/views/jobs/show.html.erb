@@ -7,7 +7,7 @@
 <p><b>Local de Trabalho: </b><%= @job.city %></p><br/>
 
 <% if candidate_signed_in? %>
-  <%= link_to 'Candidatar-se', new_subscription_path %><br/>
+  <%= link_to 'Candidatar-se', new_subscription_path, param: @job.id %><br/>
 
 <% elsif headhunter_signed_in? %>
   <%# <%= link_to 'Editar', edit_job_path %><br/> 

@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_011425) do
     t.integer "job_id"
     t.integer "candidate_id"
     t.string "about_candidate"
-    t.boolean "featured_profile"
+    t.boolean "featured_profile", default: false
     t.string "deniel_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

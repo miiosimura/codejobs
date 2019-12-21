@@ -8,14 +8,15 @@ feature 'Candidate subscribe a job' do
     
     login_as(candidate, scope: :candidate)
     visit root_path
-    fill_in 'Bora se candidatar?', with: 'Ruby'
-    click_on 'Buscar Vagas'
+    fill_in 'Buscar Vagas', with: 'Ruby'
+    click_on 'Buscar'
+
     click_on 'Desenvolvedor Ruby Junior'
     click_on 'Candidatar-se'
     fill_in 'Conte um pouco sobre você :)', with: 'Gosto de programar em Ruby'
     click_on 'Salvar inscrição'
 
-    expect(current_path).to eq(subscription_path)
+    expect(current_path).to eq(subscriptions_path)
     expect(page).to have_content('Minhas Vagas')
     expect(page).to have_link('Desenvolvedor Ruby Junior')
     expect(page).to have_link('Voltar')  
