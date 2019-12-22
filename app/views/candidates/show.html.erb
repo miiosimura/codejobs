@@ -6,4 +6,18 @@
   <li><b>Experiencia Profissional: </b><%= @candidate.work_experience %></li>
   <li><b>Trabalhos de Interesse: </b><%= @candidate.job_interest %></li>
 </ul>
+
+<hr>
+
+<% if headhunter_signed_in? %>
+  <h2>Mensagens</h2>
+
+  <%= form_with model: @message, local: false do |m| %>
+    <%= m.label :message_content, 'Mande uma mensagem' %><br/>
+    <%= m.text_area(:message_content, size: "24x6") %><br/>
+    <%= m.submit 'Enviar' %>
+  <% end %>
+<% end %>
+
+<br/><br/>
 <%= link_to 'Voltar', root_path %>
