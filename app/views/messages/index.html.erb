@@ -1,0 +1,5 @@
+<% @messages.each do |message| %>
+  <h3><%= link_to message.headhunter.email, candidate_path(current_candidate, headhunter_id: message.headhunter_id) %></h3>
+  <b>Mensagem:</b> <%= message.content %><br/>
+  <hr>
+<% end %>

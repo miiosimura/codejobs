@@ -25,7 +25,7 @@
   <h2>Inscritos na vaga</h2>
 
   <% @job.subscriptions.each do |subscription| %>
-    <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id) %></h3>
+    <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id, headhunter_id: current_headhunter.id) %></h3>
     <b>Sobre o candidato:</b> <%= subscription.about_candidate %><br/>
   <% end %>
 <% end %>

@@ -1,6 +1,8 @@
 class CandidatesController < ApplicationController
   def show
     @candidate = Candidate.find(params[:id])
+    # @messages = Message.where(candidate_id: @candidate.id, headhunter_id: params[:headhunter_id])
+    @messages = @candidate.messages.where(headhunter_id: params[:headhunter_id])
   end
   
   def edit

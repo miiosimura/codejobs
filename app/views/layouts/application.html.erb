@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <% if headhunter_signed_in? %>
+      Logado como: Recrutador<br/>
+      Email: <%= current_headhunter.email %><br/>
+
+    <% elsif candidate_signed_in? %>
+      Logado como: Candidato<br/>
+      Email: <%= current_candidate.email %><br/>
+
+    <% else %>
+      Visitante
+    <% end %>
+
     <p class="notice"><%= notice %></p><br/>
     <p class="alert"><%= alert %></p><br/>
     <%= yield %><br/>

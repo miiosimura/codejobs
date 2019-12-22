@@ -5,6 +5,7 @@ class Candidate < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :subscriptions
+  has_many :messages
 
 
   validate :verify_valid_birthday, if: :birthday
