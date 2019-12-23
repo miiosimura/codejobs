@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: :index do
     get 'change_featured_profile', on: :member
+    get 'edit_denial', on: :member
+    post 'denial', on: :member
   end
   resources :messages
 end

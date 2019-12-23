@@ -8,6 +8,9 @@
     <li><b>Trabalhos de Interesse: </b><%= @candidate.job_interest %></li>
   </ul>
 
+  <br/>
+  <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@candidate.id) %><br/>
+
   <hr>
 
   <h2>Mensagens</h2>

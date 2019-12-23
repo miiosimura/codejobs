@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_142513) do
+ActiveRecord::Schema.define(version: 2019_12_23_120445) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_142513) do
     t.integer "candidate_id"
     t.string "about_candidate"
     t.boolean "featured_profile", default: false
-    t.string "deniel_reason"
+    t.string "denial_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["candidate_id"], name: "index_subscriptions_on_candidate_id"
