@@ -6,7 +6,7 @@ feature 'Headhunter create account' do
     click_on 'Sou Recrutador'
     click_on 'Cadastre-se'
 
-    fill_in 'Email', with: 'email@teste.com'
+    fill_in 'Email', with: 'headhunter@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Cadastrar'
@@ -19,13 +19,13 @@ feature 'Headhunter create account' do
   end
 
   scenario 'and email must be unique' do
-    Headhunter.create!(email: 'email@email.com', password: '123456')
+    Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Recrutador'
     click_on 'Cadastre-se'
 
-    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Email', with: 'headhunter@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Cadastrar'

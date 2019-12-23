@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Candidate create profile' do
   scenario 'successfully' do
-    candidate = Candidate.create!(email: 'email@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456')
     
     login_as(candidate, scope: :candidate)
     visit root_path
@@ -20,7 +20,7 @@ feature 'Candidate create profile' do
   end
 
   scenario 'and birthday is not valid' do
-    candidate = Candidate.create!(email: 'email@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456')
     
     login_as(candidate, scope: :candidate)
     visit edit_candidate_path(candidate)

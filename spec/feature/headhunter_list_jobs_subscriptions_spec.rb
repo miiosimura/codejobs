@@ -2,12 +2,12 @@ require 'rails_helper'
 
 feature 'Headhunter list his job subscriptions' do
   scenario 'successfully' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     other_job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Java', job_description: 'Descrição da vaga aqui', skills_description: 'Java', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Senior', subscription_date: '2020-01-01', city: 'São Paulo')
-    candidate = Candidate.create!(email: 'email@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
-    other_candidate = Candidate.create!(email: 'other.email@email.com', password: '123456', name: 'Mary', birthday: '1996-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
-    another_candidate = Candidate.create!(email: 'another.email@email.com', password: '123456', name: 'James', birthday: '1996-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    other_candidate = Candidate.create!(email: 'other.candidate@email.com', password: '123456', name: 'Mary', birthday: '1996-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    another_candidate = Candidate.create!(email: 'another.candidate@email.com', password: '123456', name: 'James', birthday: '1996-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     other_subscription = Subscription.create!(job_id: job.id, candidate_id: other_candidate.id, about_candidate: 'Sou muito inteliegente')
     another_subscription = Subscription.create!(job_id: other_job.id, candidate_id: another_candidate.id, about_candidate: 'Sou muito atencioso')
@@ -29,8 +29,8 @@ feature 'Headhunter list his job subscriptions' do
   end
 
   scenario 'and is able to see the candidate details' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
-    candidate = Candidate.create!(email: 'email@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     

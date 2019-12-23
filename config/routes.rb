@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :subscriptions
   end
 
-  resources :subscriptions, only: :index
+  resources :subscriptions, only: :index do
+    get 'change_featured_profile', on: :member
+  end
   resources :messages
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Headhunter create a job' do
   scenario 'successfully' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     login_as(headhunter, scope: :headhunter)
     visit root_path
@@ -30,7 +30,7 @@ feature 'Headhunter create a job' do
   end
 
   scenario 'and insert invalid subscription date' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     login_as(headhunter, scope: :headhunter)
     visit root_path
@@ -43,7 +43,7 @@ feature 'Headhunter create a job' do
   end
 
   scenario 'and salary max is less than salary min' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     login_as(headhunter, scope: :headhunter)
     visit root_path
@@ -57,7 +57,7 @@ feature 'Headhunter create a job' do
   end
 
   scenario 'and some field went blank' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     login_as(headhunter, scope: :headhunter)
     visit root_path

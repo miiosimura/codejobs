@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-feature 'Headhunter and candidate cann comment profile' do
+feature 'Headhunter and candidate can comment profile' do
   scenario 'headhunter can comment successfully' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
-    candidate = Candidate.create!(email: 'teste@teste.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     
@@ -29,8 +29,8 @@ feature 'Headhunter and candidate cann comment profile' do
   end
 
   scenario 'and candidate can respond' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
-    candidate = Candidate.create!(email: 'teste@teste.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     Message.create!(content: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
@@ -38,7 +38,7 @@ feature 'Headhunter and candidate cann comment profile' do
     login_as(candidate, scope: :candidate)
     visit root_path
     click_on 'Minhas Mensagens'
-    click_on 'email@email.com'
+    click_on 'headhunter@email.com'
     fill_in 'Mande uma resposta', with: 'Tenho sim'
     click_on 'Enviar'
 
@@ -49,8 +49,8 @@ feature 'Headhunter and candidate cann comment profile' do
   end
 
   scenario 'and the commentaries are still visible' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
-    candidate = Candidate.create!(email: 'teste@teste.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     Message.create!(content: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
@@ -65,6 +65,29 @@ feature 'Headhunter and candidate cann comment profile' do
     expect(page).to have_content('Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?')
     expect(page).to have_content('Tenho sim')
     expect(page).to have_content('Certo, o endereço é: Rua XPTO, numero 1234')
+    expect(page).to have_link('Voltar')
+  end
+
+  scenario 'and a headhunter is not able to see other headhunters talk' do
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    other_headhunter = Headhunter.create!(email: 'other.headhunter@email.com', password: '123456')
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
+    job = Job.create!(headhunter_id: headhunter.id, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
+    other_job = Job.create!(headhunter_id: other_headhunter.id, title: 'Desenvolvedor Ruby Pleno', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 3000.0, salary_max: 4000.0, job_level: 'Pleno', subscription_date: '2020-01-01', city: 'São Paulo')
+    subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
+    other_subscription = Subscription.create!(job_id: other_job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
+    Message.create!(content: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
+    Message.create!(content: 'Tenho sim', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'candidate')
+    Message.create!(content: 'Certo, o endereço é: Rua XPTO, numero 1234', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
+    
+    login_as(other_headhunter, scope: :headhunter)
+    visit jobs_path
+    click_on other_job.title
+    click_on candidate.name
+
+    expect(page).not_to have_content('Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?')
+    expect(page).not_to have_content('Tenho sim')
+    expect(page).not_to have_content('Certo, o endereço é: Rua XPTO, numero 1234')
     expect(page).to have_link('Voltar')
   end
 end

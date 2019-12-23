@@ -17,5 +17,18 @@ class SubscriptionsController < ApplicationController
     else
       render :new
     end
-	end
+  end
+  
+  def change_featured_profile
+    @subscription = Subscription.find(params[:id])
+
+    if @subscription.featured_profile
+      @subscription.featured_profile = false
+    else
+      @subscription.featured_profile = true
+    end
+
+    @subscription.save
+    redirect_to job_path(@subscription.job_id)
+  end
 end

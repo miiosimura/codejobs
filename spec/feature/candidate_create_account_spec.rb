@@ -6,7 +6,7 @@ feature 'Candidate create account' do
     click_on 'Sou Candidato'
     click_on 'Cadastre-se'
 
-    fill_in 'Email', with: 'email@teste.com'
+    fill_in 'Email', with: 'candidate@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Cadastrar'
@@ -20,13 +20,13 @@ feature 'Candidate create account' do
   end
   
   scenario 'and email must be unique' do
-    Candidate.create!(email: 'email@email.com', password: '123456')
+    Candidate.create!(email: 'candidate@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Candidato'
     click_on 'Cadastre-se'
 
-    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Email', with: 'candidate@email.com'
     fill_in 'Senha', with: '123456'
     fill_in 'Confirmar Senha', with: '123456'
     click_on 'Cadastrar'

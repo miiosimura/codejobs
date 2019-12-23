@@ -2,12 +2,12 @@ require 'rails_helper'
 
 feature 'Headhunter sign in' do
   scenario 'successfully' do
-    Headhunter.create!(email: 'email@email.com', password: '123456')
+    Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Recrutador'
     
-    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Email', with: 'headhunter@email.com'
     fill_in 'Senha', with: '123456'
     click_on 'Log in'
 
@@ -19,7 +19,7 @@ feature 'Headhunter sign in' do
   end
 
   scenario 'and must fill all fields' do
-    Headhunter.create!(email: 'email@email.com', password: '123456')
+    Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Recrutador'
@@ -33,7 +33,7 @@ feature 'Headhunter sign in' do
   end
 
   scenario 'and email cant be blank' do
-    Headhunter.create!(email: 'email@email.com', password: '123456')
+    Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Recrutador'
@@ -47,12 +47,12 @@ feature 'Headhunter sign in' do
   end
 
   scenario 'and password cant be blank' do
-    Headhunter.create!(email: 'email@email.com', password: '123456')
+    Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     visit root_path
     click_on 'Sou Recrutador'
     
-    fill_in 'Email', with: 'email@email.com'
+    fill_in 'Email', with: 'candidate@email.com'
     fill_in 'Senha', with: ''
     click_on 'Log in'
 
@@ -61,7 +61,7 @@ feature 'Headhunter sign in' do
   end
 
   scenario 'and log out' do
-    headhunter = Headhunter.create!(email: 'email@email.com', password: '123456')
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
