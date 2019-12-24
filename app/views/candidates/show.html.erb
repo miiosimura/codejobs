@@ -9,6 +9,12 @@
   </ul>
 
   <br/>
+  <% if @propose.any? %>
+    Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
+  <% else %>
+    <%= link_to 'Enviar Proposta', new_propose_path(candidate_id: @candidate.id, subscription_id: params[:subscription_id]) %><br/>
+  <% end %>
+
   <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@candidate.id) %><br/>
 
   <hr>

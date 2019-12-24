@@ -35,7 +35,7 @@
   <% @job.subscriptions.each do |subscription| %>
     
     <% if subscription.denial_reason.blank? %>
-      <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id, headhunter_id: current_headhunter.id) %></h3>
+      <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id, headhunter_id: current_headhunter.id, subscription_id: subscription.id) %></h3>
       <% if subscription.featured_profile %>
         <%= link_to 'Em destaque', change_featured_profile_subscription_path(subscription) %><br/>
       <% else %>

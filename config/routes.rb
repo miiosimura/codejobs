@@ -14,5 +14,7 @@ Rails.application.routes.draw do
     get 'edit_denial', on: :member
     post 'denial', on: :member
   end
+  
   resources :messages
+  resources :proposes, only: [:index, :new, :create]
 end

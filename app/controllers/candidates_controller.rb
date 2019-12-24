@@ -3,6 +3,8 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     # @messages = Message.where(candidate_id: @candidate.id, headhunter_id: params[:headhunter_id])
     @messages = @candidate.messages.where(headhunter_id: params[:headhunter_id])
+    #@propose = Propose.where(candidate_id: @candidate.id, headhunter_id: current_headhunter, subscription_id: params[:subscription_id])
+    @propose = @candidate.proposes.where(subscription_id: params[:subscription_id])
   end
   
   def edit
