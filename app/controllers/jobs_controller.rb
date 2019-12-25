@@ -5,7 +5,8 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @subscription = Subscription.find_by(job_id: @job, candidate_id: current_candidate)
+    @subscription = Subscription.find_by(job_id: @job, candidate_id: current_candidate) if current_candidate
+    @propose = @subscription.candidate.proposes.find_by(subscription_id: @subscription) if @subscription
   end
 
   def new

@@ -9,9 +9,21 @@
 <hr>
 
 <% if candidate_signed_in? %>
+  <h2>Status da Inscrição</h2>
+
   <% if current_candidate.verified_profile? %>
-    <% if @subscription && @subscription.denial_reason.blank? %>
-      Você ja se candidatou. Aguarde o retorno do Recrutador
+    <% if @propose && @propose.accepted %>
+      Você aceitou a Proposta! Parabéns pela nova contratação
+
+    <% elsif @propose && @propose.accepted == false %>
+      Você recusou a Proposta
+
+    <% elsif @propose && @propose.accepted.nil? %>
+      Oba! O recrutador te enviou uma Proposta! :D<br/>
+      <%= link_to 'Ver Proposta', @propose %>
+
+    <% elsif @subscription && @subscription.denial_reason.blank? && !@propose %>
+      Aguardando o retorno do Recrutador
       
     <% elsif @subscription && @subscription.denial_reason %>
       <h3>Resposta do Recrutador:</h3>

@@ -33,7 +33,7 @@ feature 'Candidate subscribe a job' do
     visit subscriptions_path
     click_on 'Desenvolvedor Ruby Junior'
 
-    expect(page).to have_content('Você ja se candidatou. Aguarde o retorno do Recrutador')
+    expect(page).to have_content('Aguardando o retorno do Recrutador')
     expect(page).to have_link('Voltar')
     expect(page).not_to have_link('Candidatar-se')
   end

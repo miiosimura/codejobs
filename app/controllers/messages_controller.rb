@@ -16,9 +16,9 @@ class MessagesController < ApplicationController
     end
     
     if @message.save
-      redirect_to candidate_path(@message.candidate_id, headhunter_id: @message.headhunter_id)
+      redirect_to candidate_path(@message.candidate_id, headhunter_id: @message.headhunter_id, subscription_id: params[:subscription_id])
     else
-      render candidate_path(@message.candidate_id, headhunter_id: @message.headhunter_id)
+      render candidate_path(@message.candidate_id, headhunter_id: @message.headhunter_id, subscription_id: params[:subscription_id])
     end
 
   end

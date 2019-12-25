@@ -1,0 +1,5 @@
+<%= form_with url: denial_propose_path, local: true do |d| %>
+  <%= d.label :denial_reason, 'Qual motivo da recusa?' %>
+  <%= d.text_area(:denial_reason, size: "24x6") %>
+  <%= d.submit 'Enviar' %>
+<% end %>

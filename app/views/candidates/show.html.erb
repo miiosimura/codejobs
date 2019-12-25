@@ -9,13 +9,22 @@
   </ul>
 
   <br/>
-  <% if @propose.any? %>
+  <% if @propose && @propose.accepted %>
+    O Candidato aceitou sua proposta!<br/>
+
+  <% elsif @propose && @propose.accepted == false %>
+    O Candidato recusou sua proposta<br/>
+    Motivo: <%= @propose.denial_reason %>
+
+  <% elsif @propose && @propose.accepted.nil? %>
     Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
+
   <% else %>
     <%= link_to 'Enviar Proposta', new_propose_path(candidate_id: @candidate.id, subscription_id: params[:subscription_id]) %><br/>
+    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@candidate.id) %><br/>
   <% end %>
 
-  <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@candidate.id) %><br/>
+  
 
   <hr>
 
@@ -37,6 +46,7 @@
 
   <%= form_with url: messages_path, method: :post, local: false do |m| %>
     <%= m.hidden_field(:candidate_id, value: params[:id]) %>
+    <%= m.hidden_field(:subscription_id, value: params[:subscription_id]) %>
     <%= m.label :content, 'Mande uma mensagem' %><br/>
     <%= m.text_area(:content, size: "24x6") %><br/>
     <%= m.submit 'Enviar' %>
@@ -63,6 +73,7 @@
   <%= form_with url: messages_path, method: :post, local: true do |m| %>
     <%= m.hidden_field(:headhunter_id, value: params[:headhunter_id]) %>
     <%= m.hidden_field(:candidate_id, value: params[:id]) %>
+    <%= m.hidden_field(:subscription_id, value: params[:subscription_id]) %>
     <%= m.label :content, 'Mande uma resposta' %><br/>
     <%= m.text_area(:content, size: "24x6") %><br/>
     <%= m.submit 'Enviar' %>

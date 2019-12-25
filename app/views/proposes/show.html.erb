@@ -1,0 +1,12 @@
+<h1>Proposta</h1>
+<ul>
+  <li><b>Data de Inicio:</b> <%= @propose.start_date %></li>
+  <li><b>Salario:</b> <%= @propose.salary %></li>
+  <li><b>Beneficios:</b> <%= @propose.benefit %></li>
+  <li><b>Função:</b> <%= @propose.function %></li>
+  <li><b>Expectativas da Empresa:</b> <%= @propose.company_expectation %></li>
+  <li><b>Bônus:</b> <%= @propose.bonus %></li>
+</ul>
+
+<%= link_to 'Aceitar Proposta', accept_propose_path, data: { confirm: "Tem certeza que deseja aceitar a proposta?" } %><br/>
+<%= link_to 'Recusar Proposta', edit_denial_propose_path %><br/>

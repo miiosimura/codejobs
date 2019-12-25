@@ -16,5 +16,9 @@ Rails.application.routes.draw do
   end
   
   resources :messages
-  resources :proposes, only: [:index, :new, :create]
+  resources :proposes, only: [:index, :new, :create, :show] do
+    get 'accept', on: :member
+    get 'edit_denial', on: :member
+    post 'denial', on: :member
+  end
 end
