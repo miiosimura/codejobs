@@ -6,7 +6,6 @@ class Candidate < ApplicationRecord
 
   has_many :subscriptions
   has_many :messages
-  has_many :proposes
 
   validate :verify_valid_birthday, if: :birthday
 

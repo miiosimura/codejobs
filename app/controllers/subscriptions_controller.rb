@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   def index
-    @subscriptions = Subscription.where(candidate_id: current_candidate.id)
+    @active_subscriptions = Subscription.where(candidate_id: current_candidate.id)
   end
 
 	def new
@@ -42,6 +42,4 @@ class SubscriptionsController < ApplicationController
     redirect_to job_path(@subscription.job_id)
 
   end
-
-
 end

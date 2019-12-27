@@ -1,5 +1,15 @@
-<% @messages.each do |message| %>
-  <h3><%= link_to message.headhunter.email, candidate_path(current_candidate, headhunter_id: message.headhunter_id) %></h3>
-  <b>Mensagem:</b> <%= message.content %><br/>
-  <hr>
+<% if headhunter_signed_in? %>
+  <% @messages.each do |message| %>
+    <h3><%= link_to message.candidate.email, message_path(current_headhunter, candidate_id: message.candidate_id) %></h3>
+    <b>Mensagem:</b> <%= message.content %><br/>
+    <hr>
+  <% end %>
+
+<% elsif candidate_signed_in? %>
+  <% @messages.each do |message| %>
+    <h3><%= link_to message.headhunter.email, message_path(current_candidate, headhunter_id: message.headhunter_id) %></h3>
+    <b>Mensagem:</b> <%= message.content %><br/>
+    <hr>
+  <% end %>
 <% end %>
+

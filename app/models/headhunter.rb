@@ -6,5 +6,4 @@ class Headhunter < ApplicationRecord
 
   has_many :jobs
   has_many :messages
-  has_many :proposes
 end

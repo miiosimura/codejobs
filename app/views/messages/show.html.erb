@@ -1,0 +1,23 @@
+<h2>Mensagens</h2>
+  
+<% @messages.each do |message| %>
+  <% if message.sent_by == 'headhunter' %>
+    <b>Enviado por: </b><%= message.headhunter.email %><br/>
+  <% else %>
+    <b>Enviado por: </b><%= message.candidate.email %><br/>
+  <% end %>
+
+  <b>Mensagem: </b><%= message.content %><br/>
+  <b>Criado em: </b><%= message.created_at %><br/><br/>
+<% end %>
+
+<br/>
+<hr>
+
+<% if headhunter_signed_in? %>
+  <%= link_to 'Enviar Nova Mensagem', new_message_path(candidate_id: params[:candidate_id]) %><br/>
+<% elsif candidate_signed_in? %>
+  <%= link_to 'Enviar Nova Mensagem', new_message_path(headhunter_id: params[:headhunter_id]) %><br/>
+<% end %>
+
+<%= link_to 'Voltar', root_path%>

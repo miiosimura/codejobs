@@ -8,11 +8,10 @@ class ProposesController < ApplicationController
   end
 
   def create
-    @propose = Propose.new(params.require(:propose).permit(:subscription_id, :candidate_id, :start_date, :salary, :benefit, :function, :company_expectation, :bonus))
-    @propose.headhunter_id = current_headhunter.id
+    @propose = Propose.new(params.require(:propose).permit(:subscription_id, :start_date, :salary, :benefit, :function, :company_expectation, :bonus))
 
     if @propose.save
-      redirect_to candidate_path(@propose.candidate_id, headhunter_id: @propose.headhunter_id, subscription_id: @propose.subscription_id)
+      redirect_to candidate_path(@propose.subscription.candidate_id, subscription_id: @propose.subscription_id)
     else
       render :new
     end
@@ -20,7 +19,7 @@ class ProposesController < ApplicationController
 
   def accept
     @propose = Propose.find(params[:id])
-    reject_subscriptions(@propose.candidate, @propose)
+    reject_subscriptions(current_candidate, @propose)
     @propose.update(accepted: true)
     redirect_to job_path(@propose.subscription.job)
   end
@@ -37,10 +36,14 @@ class ProposesController < ApplicationController
 
   private
   def reject_subscriptions(candidate, accepted_propose)
-    candidate.proposes.each do |propose|
-      unless propose == accepted_propose
+    subscriptions = candidate.subscriptions.where.not(id: accepted_propose.subscription_id)
+
+    subscriptions.each do |subscription|
+      propose = Propose.find_by(subscription_id: subscription)
+      if !propose.nil?
         propose.update(accepted: false, denial_reason: 'Candidato aceitou outra proposta')
       end
     end
   end
 end
+  

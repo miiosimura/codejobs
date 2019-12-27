@@ -13,12 +13,13 @@ Rails.application.routes.draw do
     get 'change_featured_profile', on: :member
     get 'edit_denial', on: :member
     post 'denial', on: :member
+    
+    resources :proposes, only: [:index, :new, :create, :show] do
+      get 'accept', on: :member
+      get 'edit_denial', on: :member
+      post 'denial', on: :member
+    end
   end
   
   resources :messages
-  resources :proposes, only: [:index, :new, :create, :show] do
-    get 'accept', on: :member
-    get 'edit_denial', on: :member
-    post 'denial', on: :member
-  end
 end

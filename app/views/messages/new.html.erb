@@ -1,0 +1,19 @@
+<% if @message.errors.any? %>
+    <% @message.errors.full_messages.each do |message| %>
+      <%= message %><br/>
+    <% end %>
+<% end %>
+
+<h1>Enviando Mensagem</h1>
+
+<%= form_with url: messages_path, method: :post, local: true do |m| %>  
+  <% if headhunter_signed_in? %>
+    <%= m.hidden_field(:candidate_id, value: params[:candidate_id]) %>
+  <% elsif candidate_signed_in? %>
+    <%= m.hidden_field(:headhunter_id, value: params[:headhunter_id]) %>
+  <% end %>
+
+  <%= m.label :content, 'Mande uma mensagem' %><br/>
+  <%= m.text_area(:content, size: "24x6") %><br/>
+  <%= m.submit 'Enviar' %>
+<% end %>

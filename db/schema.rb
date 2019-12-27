@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_201551) do
+ActiveRecord::Schema.define(version: 2019_12_26_175606) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -68,8 +68,6 @@ ActiveRecord::Schema.define(version: 2019_12_23_201551) do
   end
 
   create_table "proposes", force: :cascade do |t|
-    t.integer "candidate_id"
-    t.integer "headhunter_id"
     t.integer "subscription_id"
     t.datetime "start_date"
     t.decimal "salary"
@@ -81,8 +79,6 @@ ActiveRecord::Schema.define(version: 2019_12_23_201551) do
     t.string "denial_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["candidate_id"], name: "index_proposes_on_candidate_id"
-    t.index ["headhunter_id"], name: "index_proposes_on_headhunter_id"
     t.index ["subscription_id"], name: "index_proposes_on_subscription_id"
   end
 

@@ -9,7 +9,7 @@
   </ul>
 
   <br/>
-  <% if @propose && @propose.accepted %>
+  <% if @propose && @propose.accepted == true %>
     O Candidato aceitou sua proposta!<br/>
 
   <% elsif @propose && @propose.accepted == false %>
@@ -20,65 +20,13 @@
     Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
 
   <% else %>
-    <%= link_to 'Enviar Proposta', new_propose_path(candidate_id: @candidate.id, subscription_id: params[:subscription_id]) %><br/>
-    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@candidate.id) %><br/>
-  <% end %>
-
-  
-
-  <hr>
-
-  <h2>Mensagens</h2>
-
-  <% @messages.each do |message| %>
-    <% if message.sent_by == 'headhunter' %>
-      <b>Enviado por: </b><%= message.headhunter.email %><br/>
-    <% else %>
-      <b>Enviado por: </b><%= message.candidate.email %><br/>
-    <% end %>
-
-    <b>Mensagem: </b><%= message.content %><br/>
-    <b>Criado em: </b><%= message.created_at %><br/><br/>
-  <% end %>
-
-  <br/>
-  <hr>
-
-  <%= form_with url: messages_path, method: :post, local: false do |m| %>
-    <%= m.hidden_field(:candidate_id, value: params[:id]) %>
-    <%= m.hidden_field(:subscription_id, value: params[:subscription_id]) %>
-    <%= m.label :content, 'Mande uma mensagem' %><br/>
-    <%= m.text_area(:content, size: "24x6") %><br/>
-    <%= m.submit 'Enviar' %>
-  <% end %>
-
-
-<% elsif candidate_signed_in? %>
-  <h2>Mensagens</h2>
-
-  <% @messages.each do |message| %>
-    <% if message.sent_by == 'headhunter' %>
-      <b>Enviado por: </b><%= message.headhunter.email %><br/>
-    <% else %>
-      <b>Enviado por: </b><%= message.candidate.email %><br/>
-    <% end %>
-
-    <b>Mensagem: </b><%= message.content %><br/>
-    <b>Criado em: </b><%= message.created_at %><br/><br/>
-  <% end %>
-
-  <br/>
-  <hr>
-
-  <%= form_with url: messages_path, method: :post, local: true do |m| %>
-    <%= m.hidden_field(:headhunter_id, value: params[:headhunter_id]) %>
-    <%= m.hidden_field(:candidate_id, value: params[:id]) %>
-    <%= m.hidden_field(:subscription_id, value: params[:subscription_id]) %>
-    <%= m.label :content, 'Mande uma resposta' %><br/>
-    <%= m.text_area(:content, size: "24x6") %><br/>
-    <%= m.submit 'Enviar' %>
+    <%= link_to 'Enviar Proposta', new_subscription_propose_path(@subscription) %><br/>
+    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@subscription) %><br/>
   <% end %>
 <% end %>
 
+<hr>
+
 <br/><br/>
+<%= link_to 'Enviar Mensagem', new_message_path(candidate_id: @candidate.id) %><br/>
 <%= link_to 'Voltar', root_path %>

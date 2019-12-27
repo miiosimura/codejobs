@@ -1,5 +1,11 @@
+<% if @propose.errors.any? %>
+    <% @propose.errors.full_messages.each do |message| %>
+      <%= message %><br/>
+    <% end %>
+<% end %>
+
 <h1>Enviar Proposta</h1>
-<%= form_with model: @propose, local: true do |p| %>
+<%= form_with(model: @propose, url: subscription_proposes_path, local: true) do |p| %>
   <%= p.hidden_field(:candidate_id, value: params[:candidate_id]) %>
   <%= p.hidden_field(:subscription_id, value: params[:subscription_id]) %>
 
