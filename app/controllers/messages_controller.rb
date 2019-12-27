@@ -32,7 +32,8 @@ class MessagesController < ApplicationController
       if @message.save
         redirect_to message_path(current_headhunter, candidate_id: @message.candidate_id)
       else
-        render :new
+        flash[:alert] = 'Mensagem não pode ser em branco'
+        redirect_to new_message_path(candidate_id: params[:candidate_id])
       end
 
     elsif candidate_signed_in?
@@ -43,7 +44,8 @@ class MessagesController < ApplicationController
       if @message.save
         redirect_to message_path(current_candidate, headhunter_id: @message.headhunter_id)
       else
-        render :new
+        flash[:alert] = 'Mensagem não pode ser em branco'
+        redirect_to new_message_path(headhunter_id: params[:headhunter_id])
       end
     end
   end

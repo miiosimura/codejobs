@@ -6,7 +6,7 @@
 
 <h1>Enviando Mensagem</h1>
 
-<%= form_with url: messages_path, method: :post, local: true do |m| %>  
+<%= form_with url: messages_path, method: :post, local: false do |m| %>  
   <% if headhunter_signed_in? %>
     <%= m.hidden_field(:candidate_id, value: params[:candidate_id]) %>
   <% elsif candidate_signed_in? %>

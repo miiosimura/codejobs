@@ -4,5 +4,5 @@ class Message < ApplicationRecord
 
   enum sent_by: [:headhunter, :candidate]
 
-  validates :content, presence: {message: ' não pode ser em branco'}
+  validates :content, presence: true
 end

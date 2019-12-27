@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   def index
-    @active_subscriptions = Subscription.where(candidate_id: current_candidate.id)
+    @subscriptions = Subscription.where(candidate_id: current_candidate.id)
   end
 
 	def new

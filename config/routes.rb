@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   
   resources :candidates
+
   resources :jobs do
     get 'search', on: :collection
     resources :subscriptions
@@ -21,5 +22,5 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :messages
+  resources :messages, only: [:index, :show, :new, :create]
 end
