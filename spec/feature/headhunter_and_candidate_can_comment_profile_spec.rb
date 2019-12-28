@@ -16,7 +16,6 @@ feature 'Headhunter and candidate can comment profile' do
     fill_in 'Mande uma mensagem', with: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?'
     click_on 'Enviar'
 
-    expect(current_path).to eq(message_path(headhunter.id))
     expect(page).to have_content('Mensagens')
     expect(page).to have_content("Enviado por: #{headhunter.email}")
     expect(page).to have_content('Mensagem: Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?')
@@ -30,7 +29,7 @@ feature 'Headhunter and candidate can comment profile' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-01-01', city: 'São Paulo')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    Message.create!(content: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
+    message = Message.create!(content: 'Voce tem disponibilidade para vir fazer uma entrevista sexta-feira as 18 horas?', candidate_id: candidate.id,  headhunter_id: headhunter.id, sent_by: 'headhunter')
     
     login_as(candidate, scope: :candidate)
     visit root_path
@@ -40,7 +39,6 @@ feature 'Headhunter and candidate can comment profile' do
     fill_in 'Mande uma mensagem', with: 'Tenho sim'
     click_on 'Enviar'
 
-    expect(current_path).to eq(message_path(candidate.id))
     expect(page).to have_content("Enviado por: #{candidate.email}")
     expect(page).to have_content('Mensagem: Tenho sim')
     expect(page).to have_content("Criado em: #{Message.last.created_at}")
@@ -74,10 +72,10 @@ feature 'Headhunter and candidate can comment profile' do
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     
     login_as(headhunter, scope: :headhunter)
-    visit new_message_path(candidate_id: candidate.id)
+    visit new_candidate_messages_path(candidate_id: candidate.id)
     click_on 'Enviar'
 
-    expect(page).to have_content('Mensagem não pode ser em branco')
+    expect(page).to have_content('Content não pode ser em branco')
   end
 
   scenario 'and Headhunter send empty message' do
@@ -87,9 +85,9 @@ feature 'Headhunter and candidate can comment profile' do
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
     
     login_as(candidate, scope: :candidate)
-    visit new_message_path(headhunter_id: headhunter.id)
+    visit new_headhunter_messages_path(headhunter_id: headhunter.id)
     click_on 'Enviar'
 
-    expect(page).to have_content('Mensagem não pode ser em branco')
+    expect(page).to have_content('Content não pode ser em branco')
   end
 end

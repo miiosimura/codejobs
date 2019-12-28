@@ -8,10 +8,11 @@ class ProposesController < ApplicationController
   end
 
   def create
-    @propose = Propose.new(params.require(:propose).permit(:subscription_id, :start_date, :salary, :benefit, :function, :company_expectation, :bonus))
+    @propose = Propose.new(params.require(:propose).permit(:start_date, :salary, :benefit, :function, :company_expectation, :bonus))
+    @propose.subscription_id = params[:subscription_id]
 
     if @propose.save
-      redirect_to candidate_path(@propose.subscription.candidate_id, subscription_id: @propose.subscription_id)
+      redirect_to candidate_path(@propose.subscription.candidate_id, subscription_id: params[:subscription_id])
     else
       render :new
     end

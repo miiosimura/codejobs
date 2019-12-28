@@ -10,17 +10,15 @@ class MessagesController < ApplicationController
   def show
     # @messages = Message.where(candidate_id: @candidate.id, headhunter_id: params[:headhunter_id])
     if headhunter_signed_in?
-      @headhunter = Headhunter.find(params[:id])
-      @messages = @headhunter.messages.where(candidate_id: params[:candidate_id])
+      @messages = current_headhunter.messages.where(candidate_id: params[:candidate_id])
 
     elsif candidate_signed_in?
-      @candidate = Candidate.find(params[:id])
-      @messages = @candidate.messages.where(headhunter_id: params[:headhunter_id])
+      @messages = current_candidate.messages.where(headhunter_id: params[:headhunter_id])
     end
   end
 
   def new
-    @message = Message.new
+    @message = Message.new()
   end
   
   def create
@@ -30,10 +28,9 @@ class MessagesController < ApplicationController
       @message.headhunter_id = current_headhunter.id
       
       if @message.save
-        redirect_to message_path(current_headhunter, candidate_id: @message.candidate_id)
+        redirect_to candidate_messages_path
       else
-        flash[:alert] = 'Mensagem não pode ser em branco'
-        redirect_to new_message_path(candidate_id: params[:candidate_id])
+        render :new
       end
 
     elsif candidate_signed_in?
@@ -42,10 +39,9 @@ class MessagesController < ApplicationController
       @message.candidate_id = current_candidate.id
 
       if @message.save
-        redirect_to message_path(current_candidate, headhunter_id: @message.headhunter_id)
+        redirect_to headhunter_messages_path
       else
-        flash[:alert] = 'Mensagem não pode ser em branco'
-        redirect_to new_message_path(headhunter_id: params[:headhunter_id])
+        render :new
       end
     end
   end

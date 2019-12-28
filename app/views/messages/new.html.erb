@@ -6,14 +6,17 @@
 
 <h1>Enviando Mensagem</h1>
 
-<%= form_with url: messages_path, method: :post, local: false do |m| %>  
-  <% if headhunter_signed_in? %>
-    <%= m.hidden_field(:candidate_id, value: params[:candidate_id]) %>
-  <% elsif candidate_signed_in? %>
-    <%= m.hidden_field(:headhunter_id, value: params[:headhunter_id]) %>
+<% if headhunter_signed_in? %>
+  <%= form_with url: candidate_messages_path, method: :post, local: true do |m| %>
+    <%= m.label :content, 'Mande uma mensagem' %><br/>
+    <%= m.text_area(:content, size: "24x6") %><br/>
+    <%= m.submit 'Enviar' %>
   <% end %>
 
-  <%= m.label :content, 'Mande uma mensagem' %><br/>
-  <%= m.text_area(:content, size: "24x6") %><br/>
-  <%= m.submit 'Enviar' %>
+<% elsif candidate_signed_in? %>
+  <%= form_with url: headhunter_messages_path, method: :post, local: true do |m| %>
+    <%= m.label :content, 'Mande uma mensagem' %><br/>
+    <%= m.text_area(:content, size: "24x6") %><br/>
+    <%= m.submit 'Enviar' %>
+  <% end %>
 <% end %>

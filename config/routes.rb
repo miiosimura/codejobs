@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   devise_for :headhunters
   root to: 'home#index'
   
-  resources :candidates
+  resources :candidates do
+    resource :messages, only: [:new, :create, :show]
+  end
+
+  resources :headhunters do
+    resource :messages, only: [:new, :create, :show]
+  end
 
   resources :jobs do
     get 'search', on: :collection
@@ -21,6 +27,6 @@ Rails.application.routes.draw do
       post 'denial', on: :member
     end
   end
-  
-  resources :messages, only: [:index, :show, :new, :create]
+
+  resources :messages, only: [:index]
 end

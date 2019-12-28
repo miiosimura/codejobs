@@ -20,13 +20,14 @@
     Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
 
   <% else %>
-    <%= link_to 'Enviar Proposta', new_subscription_propose_path(@subscription) %><br/>
-    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(@subscription) %><br/>
+    <%= link_to 'Enviar Proposta', new_subscription_propose_path(params[:subscription_id]) %><br/>
+    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(params[:subscription_id]) %><br/>
   <% end %>
 <% end %>
 
 <hr>
 
 <br/><br/>
-<%= link_to 'Enviar Mensagem', new_message_path(candidate_id: @candidate.id) %><br/>
+
+<%= link_to 'Enviar Mensagem', new_candidate_messages_path(candidate_id: @candidate.id) %><br/>
 <%= link_to 'Voltar', root_path %>

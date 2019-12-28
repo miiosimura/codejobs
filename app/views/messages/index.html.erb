@@ -1,8 +1,8 @@
 <% @messages.each do |message| %>
   <% if headhunter_signed_in? %>
-    <h3><%= link_to message.candidate.email, message_path(current_headhunter, candidate_id: message.candidate_id) %></h3>
+    <h3><%= link_to message.candidate.email, candidate_messages_path(current_headhunter, candidate_id: message.candidate_id) %></h3>
   <% elsif candidate_signed_in? %>
-    <h3><%= link_to message.headhunter.email, message_path(current_candidate, headhunter_id: message.headhunter_id) %></h3>
+    <h3><%= link_to message.headhunter.email, headhunter_messages_path(current_candidate, headhunter_id: message.headhunter_id) %></h3>
   <% end %>
   <b>Mensagem:</b> <%= message.content %><br/>
   <hr>
