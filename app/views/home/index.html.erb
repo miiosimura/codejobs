@@ -1,13 +1,15 @@
 <h1>CodeJobs</h1>
 
 <% if headhunter_signed_in? %>
+  Seja Bem vindo(a)!<br/><br/>
   <%= render 'headhunters/shared/menu' %><br/>
 
 <% elsif candidate_signed_in? %>
+  Seja Bem vindo(a)!<br/>
   <% if current_candidate.verified_profile? %>
-    Oba! Você está pronto para se candidatar! :D<br/>
+    Você está pronto para se candidatar! :D<br/><br/>
   <% else %>
-    Complete seu perfil para começar a se candidatar :)<br/>
+    Complete seu perfil para começar a se candidatar :)<br/><br/>
   <% end %>
 
   <%= render "candidates/shared/menu" %><br/><br/>

@@ -1,8 +1,15 @@
 <h1>Minhas Inscrições</h1>
 
+<h3>Inscrições Ativas</h3>
 <% @subscriptions.each do |subscription| %>
-  <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
+  <% if subscription.job.status == 'active' %>
+    <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
+  <% end %>
 <% end %>
 
-<br/>
-<%= link_to 'Voltar', root_path %>
+<h3>Inscrições Finalizadas</h3>
+<% @subscriptions.each do |subscription| %>
+  <% if subscription.job.status == 'finished' %>
+    <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
+  <% end %>
+<% end %>

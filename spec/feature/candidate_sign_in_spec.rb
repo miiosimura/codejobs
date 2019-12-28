@@ -48,7 +48,7 @@ feature 'Candidate sign in' do
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Signed in successfully')
-    expect(page).to have_content('Oba! Você está pronto para se candidatar! :D')
+    expect(page).to have_content('Você está pronto para se candidatar! :D')
     expect(page).to have_link('Sair')
     expect(page).not_to have_link('Sou Recrutador')
     expect(page).not_to have_link('Sou Candidato')

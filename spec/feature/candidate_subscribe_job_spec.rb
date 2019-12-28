@@ -20,7 +20,6 @@ feature 'Candidate subscribe a job' do
     expect(page).to have_content('Obrigada pela sua inscrição. Em breve o recrutador entrará em contato!')
     expect(page).to have_content('Minhas Inscrições')
     expect(page).to have_link('Desenvolvedor Ruby Junior')
-    expect(page).to have_link('Voltar')  
   end
 
   scenario 'and is already subscribed' do
