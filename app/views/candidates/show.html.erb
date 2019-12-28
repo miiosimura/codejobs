@@ -16,8 +16,14 @@
     O Candidato recusou sua proposta<br/>
     Motivo: <%= @propose.denial_reason %>
 
-  <% elsif @propose && @propose.accepted.nil? %>
+  <% elsif @propose && @propose.accepted.nil? && @propose.subscription.job.status == 'active' %>
     Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
+
+  <% elsif @propose && @propose.accepted.nil? && @propose.subscription.job.status == 'finished' %>
+    Você finalizou esta vaga antes do candidato enviar sua resposta à proposta
+
+  <% elsif @propose.nil? && @subscription.job.status == 'finished' %>
+    Você recusou esta proposta ao finalizar esta vaga
 
   <% else %>
     <%= link_to 'Enviar Proposta', new_subscription_propose_path(params[:subscription_id]) %><br/>

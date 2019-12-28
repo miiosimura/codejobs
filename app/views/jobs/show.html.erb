@@ -6,9 +6,9 @@
 <p><b>Data limite para inscrições: </b><%= @job.subscription_date %></p><br/>
 <p><b>Local de Trabalho: </b><%= @job.city %></p><br/>
 
-<hr>
-
 <% if candidate_signed_in? %>
+  <hr>
+
   <h2>Status da Inscrição</h2>
 
   <% if current_candidate.verified_profile? %>
@@ -18,12 +18,18 @@
     <% elsif @propose && @propose.accepted == false %>
       Você recusou a Proposta
 
-    <% elsif @propose && @propose.accepted.nil? %>
+    <% elsif @propose && @propose.accepted.nil? && @job.status == 'active' %>
       Oba! O recrutador te enviou uma Proposta! :D<br/>
       <%= link_to 'Ver Proposta', subscription_propose_path(@propose.subscription_id, @propose.id) %>
 
-    <% elsif @subscription && @subscription.denial_reason.blank? && !@propose %>
+    <% elsif @propose && @propose.accepted.nil? && @job.status == 'finished' %>
+      Que pena! Esta vaga foi finalizada.<br/>
+
+    <% elsif @subscription && @subscription.denial_reason.blank? && !@propose && @job.status == 'active' %>
       Aguardando o retorno do Recrutador
+
+    <% elsif @subscription && @subscription.denial_reason.blank? && !@propose && @job.status == 'finished' %>
+      Que pena! Esta vaga foi finalizada.<br/>
       
     <% elsif @subscription && @subscription.denial_reason %>
       <h3>Resposta do Recrutador:</h3>
@@ -41,6 +47,13 @@
 <% end %>
 
 <% if headhunter_signed_in? %>
+  <% if @job.status == 'active' %>
+    <%= link_to 'Finalizar Vaga', chance_status_job_path(@job), data: { confirm: "Tem certeza que deseja finalizar esta vaga?" } %>
+  <% else %>
+    Esta vaga foi finalizada
+  <% end %>
+
+  <hr>
   <%# <%= link_to 'Editar', edit_job_path %><br/>
   <h2>Inscritos na vaga</h2>
 

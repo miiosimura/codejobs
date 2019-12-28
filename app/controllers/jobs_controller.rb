@@ -27,8 +27,18 @@ class JobsController < ApplicationController
 
   def search
     if params[:q].length > 1
-      @jobs = Job.where('title like ?', "%#{params[:q]}%")
+      @jobs = Job.where('title like ?', "%#{params[:q]}%").where(status: 'active')
       render :search
+
+    else
+      flash[:notice] = 'O valor da busca deve conter mais de 1 caracter'
+      redirect_to root_path
     end
+  end
+
+  def chance_status
+    @job = Job.find(params[:id])
+    @job.update(status: :finished)
+    redirect_to job_path(@job)
   end
 end

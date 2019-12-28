@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :jobs do
     get 'search', on: :collection
+    get 'chance_status', on: :member
     resources :subscriptions
   end
 
