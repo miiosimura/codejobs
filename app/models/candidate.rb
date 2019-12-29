@@ -6,6 +6,7 @@ class Candidate < ApplicationRecord
 
   has_many :subscriptions
   has_many :messages
+  has_one_attached :photo
 
   validate :verify_valid_birthday, if: :birthday
 

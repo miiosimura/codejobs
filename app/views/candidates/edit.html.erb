@@ -30,6 +30,11 @@
     <%= f.text_field :job_interest %>
   </div>
 
+  <div class="field">
+    <%= f.label :photo, 'Foto de Perfil' %><br />
+    <%= f.file_field :photo %>
+  </div>
+  <br/>
   <div class="actions">
     <%= f.submit "Completar Perfil" %>
   </div>

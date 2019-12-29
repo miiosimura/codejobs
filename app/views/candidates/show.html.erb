@@ -1,14 +1,16 @@
-<% if headhunter_signed_in? %>
-  <h1><%= @candidate.name %></h1>
-  <ul>
-    <li><b>Email: </b><%= @candidate.email %></li>
-    <li><b>Data de aniversario: </b><%= @candidate.birthday %></li>
-    <li><b>Escolaridade: </b><%= @candidate.scholarity %></li>
-    <li><b>Experiencia Profissional: </b><%= @candidate.work_experience %></li>
-    <li><b>Trabalhos de Interesse: </b><%= @candidate.job_interest %></li>
-  </ul>
+<h1><%= @candidate.name %></h1>
+<ul>
+  <%= image_tag @candidate.photo, style: 'width: 150px;' if @candidate.photo.attached? %>
+  <li><b>Email: </b><%= @candidate.email %></li>
+  <li><b>Data de Nascimento: </b><%= @candidate.birthday %></li>
+  <li><b>Escolaridade: </b><%= @candidate.scholarity %></li>
+  <li><b>Experiência Profissional: </b><%= @candidate.work_experience %></li>
+  <li><b>Vagas de Interesse: </b><%= @candidate.job_interest %></li>
+</ul>
 
-  <br/>
+<br/>
+
+<% if headhunter_signed_in? %>
   <% if @propose && @propose.accepted == true %>
     O Candidato aceitou sua proposta!<br/>
 
@@ -29,11 +31,19 @@
     <%= link_to 'Enviar Proposta', new_subscription_propose_path(params[:subscription_id]) %><br/>
     <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(params[:subscription_id]) %><br/>
   <% end %>
+
+  <hr>
+
+  <br/><br/>
+
+  <%= link_to 'Enviar Mensagem', new_candidate_messages_path(candidate_id: @candidate.id) %><br/>
+  <%= link_to 'Voltar', root_path %>
+
+<% elsif candidate_signed_in? %>
+  <hr>
+  <%= link_to 'Editar Perfil', edit_candidate_path(current_candidate) %><br/>
+  <%= link_to 'Voltar', root_path %>
+
 <% end %>
 
-<hr>
 
-<br/><br/>
-
-<%= link_to 'Enviar Mensagem', new_candidate_messages_path(candidate_id: @candidate.id) %><br/>
-<%= link_to 'Voltar', root_path %>
