@@ -15,9 +15,8 @@ class Candidate < ApplicationRecord
   end
 
   def verify_valid_birthday
-    if birthday > Date.today || birthday < '1900-01-01'.to_date
-      errors.add(:birthday, " inválida")
+    if birthday > Date.today - 18.years || birthday < '1900-01-01'.to_date
+      errors.add(:birthday, "inválida")
     end
   end
-
 end

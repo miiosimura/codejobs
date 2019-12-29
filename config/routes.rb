@@ -3,18 +3,20 @@ Rails.application.routes.draw do
   devise_for :headhunters
   root to: 'home#index'
   
-  resources :candidates do
-    resource :messages, only: [:new, :create, :show]
+  resources :candidates, only: [:show, :edit, :update] do
+    resource :messages, only: [:show, :new, :create]
   end
 
   resources :headhunters do
-    resource :messages, only: [:new, :create, :show]
+    resource :messages, only: [:show, :new, :create]
   end
+  
+  resources :messages, only: [:index]
 
-  resources :jobs do
+  resources :jobs, only: [:index, :show, :new, :create] do
     get 'search', on: :collection
     get 'chance_status', on: :member
-    resources :subscriptions
+    resources :subscriptions, only: [:new, :create]
   end
 
   resources :subscriptions, only: :index do
@@ -22,12 +24,11 @@ Rails.application.routes.draw do
     get 'edit_denial', on: :member
     post 'denial', on: :member
     
-    resources :proposes, only: [:index, :new, :create, :show] do
+    resources :proposes, only: [:new, :create, :show] do
       get 'accept', on: :member
       get 'edit_denial', on: :member
       post 'denial', on: :member
     end
   end
 
-  resources :messages, only: [:index]
 end

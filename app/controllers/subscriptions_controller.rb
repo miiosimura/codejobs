@@ -40,6 +40,5 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @subscription.update(params.permit(:denial_reason))
     redirect_to job_path(@subscription.job_id)
-
   end
 end

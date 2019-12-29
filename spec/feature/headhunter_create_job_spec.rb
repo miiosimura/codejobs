@@ -39,7 +39,7 @@ feature 'Headhunter create a job' do
     fill_in 'Data limite para inscrições', with: '2019-01-01'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('Subscription date inválida.')
+    expect(page).to have_content('Subscription date inválida')
   end
 
   scenario 'and salary max is less than salary min' do

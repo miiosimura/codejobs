@@ -1,7 +1,6 @@
 class CandidatesController < ApplicationController
   def show
     @candidate = Candidate.find(params[:id])
-    #@propose = Propose.where(candidate_id: @candidate.id, headhunter_id: current_headhunter, subscription_id: params[:subscription_id])
     
     if headhunter_signed_in?
       @propose = Propose.find_by(subscription_id: params[:subscription_id])

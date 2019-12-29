@@ -6,7 +6,7 @@ class Propose < ApplicationRecord
 
   def verify_valid_start_date
     if start_date <= Date.today
-      errors.add(:start_date, " inválida.")
+      errors.add(:start_date, "inválida")
     end
   end
 end
