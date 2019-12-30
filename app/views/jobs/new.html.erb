@@ -6,29 +6,47 @@
 
 
 <%= form_with model: @job, local: true do |j| %>
-  <%= j.label :title, 'Titulo da vaga' %>
-  <%= j.text_field :title %>
+  <div class="field">
+    <%= j.label :title, 'Titulo da vaga' %>
+    <%= j.text_field :title %>
+  </div>
 
-  <%= j.label :job_description, 'Descrição' %>
-  <%= j.text_area(:job_description, size: "24x6") %>
+  <div class="field">
+    <%= j.label :job_description, 'Descrição' %>
+    <%= j.text_area(:job_description, size: "24x3") %>
+  </div>
 
-  <%= j.label :skills_description, 'Habilidades desejadas' %>
-  <%= j.text_area(:skills_description, size: "24x6") %>
+  <div class="field">
+    <%= j.label :skills_description, 'Habilidades desejadas' %>
+    <%= j.text_area(:skills_description, size: "24x3") %>
+  </div>
 
-  <%= j.label :salary_min, 'Faixa Salarial de' %>
-  <%= j.number_field :salary_min %>
+  <div class="field">
+    <%= j.label :salary_min, 'Faixa Salarial de' %>
+    <%= j.number_field :salary_min %>
+  </div>
 
-  <%= j.label :salary_max, 'até' %>
-  <%= j.number_field :salary_max %>
+  <div class="field">
+    <%= j.label :salary_max, 'até' %>
+    <%= j.number_field :salary_max %>
+  </div>
 
-  <%= j.label :job_level, 'Nível da vaga' %>
-  <%= j.select(:job_level, [['Estagio', 'Estagio'], ['Junior', 'Junior'], ['Pleno', 'Pleno'], ['Senior', 'Senior'], ['Especialista', 'Especialista'], ['Diretor', 'Diretor']]) %>
+  <div class="field">
+    <%= j.label :job_level, 'Nível da vaga' %>
+    <%= j.select(:job_level, [['Estagio', 'Estagio'], ['Junior', 'Junior'], ['Pleno', 'Pleno'], ['Senior', 'Senior'], ['Especialista', 'Especialista'], ['Diretor', 'Diretor']]) %>
+  </div>
 
-  <%= j.label :subscription_date, 'Data limite para inscrições' %>
-  <%= j.date_field :subscription_date %>
+  <div class="field">
+    <%= j.label :subscription_date, 'Data limite para inscrições' %>
+    <%= j.date_field :subscription_date %>
+  </div>
 
-  <%= j.label :city, 'Região do local de Trabalho' %>
-  <%= j.text_field :city %>
+  <div class="field">
+    <%= j.label :city, 'Região do local de Trabalho' %>
+    <%= j.text_field :city %>
+  </div>
 
-  <%= j.submit 'Cadastrar' %>
+  <div class="actions">
+    <%= j.submit 'Cadastrar' %>
+  </div>
 <% end %>

@@ -1,27 +1,19 @@
-<h1>CodeJobs</h1>
-
-<% if headhunter_signed_in? %>
-  Seja Bem vindo(a)!<br/><br/>
-  <%= render 'headhunters/shared/menu' %><br/>
-
-<% elsif candidate_signed_in? %>
-  Seja Bem vindo(a)!<br/>
-  <% if current_candidate.verified_profile? %>
-    Você está pronto para se candidatar! :D<br/><br/>
-  <% else %>
-    Complete seu perfil para começar a se candidatar :)<br/><br/>
-  <% end %>
-
-  <%= render "candidates/shared/menu" %><br/><br/>
+<div style='text-align: center;'>
+  <% if headhunter_signed_in? %>
+    <h2>Seja Bem vindo(a)!</h2>
+    
+  <% elsif candidate_signed_in? %>
+    <h2>Seja Bem vindo(a)!</h2>
+    <% if current_candidate.verified_profile? %>
+      Você está pronto para se candidatar! :D<br/><br/>
+    <% else %>
+      Complete seu perfil para começar a se candidatar :)<br/><br/>
+    <% end %>
+</div>
   
-  <%= form_with url: search_jobs_path, local: true, method: :get do %>
-    <%= label_tag :q, 'Buscar Vagas' %><br/>
-    <%= text_field_tag :q %><br/>
-    <%= submit_tag 'Buscar' %><br/>
-  <% end %>  
-
 <% else %>
-  <h3>Olá visitante! Cadastre-se para poder buscar e se candidatar as nossas vagas</h3>
+  <h3>Olá visitante!</h3>
+  Cadastre-se para poder buscar e se candidatar as nossas vagas<br/><br/>
   <%= link_to 'Sou Recrutador', headhunter_session_path %><br/>
   <%= link_to 'Sou Candidato', candidate_session_path %> <br/>
 <% end %>

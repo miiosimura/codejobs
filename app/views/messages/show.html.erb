@@ -1,14 +1,16 @@
-<h2>Mensagens</h2>
-  
-<% @messages.each do |message| %>
-  <% if message.sent_by == 'headhunter' %>
-    <b>Enviado por: </b><%= message.headhunter.email %><br/>
-  <% else %>
-    <b>Enviado por: </b><%= message.candidate.email %><br/>
-  <% end %>
+<h2>Mensagens</h2><br/>
 
-  <b>Mensagem: </b><%= message.content %><br/>
-  <b>Criado em: </b><%= message.created_at %><br/><br/>
+<% @messages.each do |message| %>
+  <div class="alert alert-info" role="alert">
+    <% if message.sent_by == 'headhunter' %>    
+      <b>Enviado por: </b><%= message.headhunter.email %><br/>
+    <% else %>
+      <b>Enviado por: </b><%= message.candidate.email %><br/>
+    <% end %>
+
+    <b>Criado em: </b><%= message.created_at %><br/><br/>
+    <b>Mensagem: </b><%= message.content %><br/>
+  </div>
 <% end %>
 
 <br/>

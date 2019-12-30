@@ -9,14 +9,14 @@
 <% if headhunter_signed_in? %>
   <%= form_with url: candidate_messages_path, method: :post, local: true do |m| %>
     <%= m.label :content, 'Mande uma mensagem' %><br/>
-    <%= m.text_area(:content, size: "24x6") %><br/>
+    <%= m.text_area(:content, size: "24x3") %><br/>
     <%= m.submit 'Enviar' %>
   <% end %>
 
 <% elsif candidate_signed_in? %>
   <%= form_with url: headhunter_messages_path, method: :post, local: true do |m| %>
     <%= m.label :content, 'Mande uma mensagem' %><br/>
-    <%= m.text_area(:content, size: "24x6") %><br/>
+    <%= m.text_area(:content, size: "24x3") %><br/>
     <%= m.submit 'Enviar' %>
   <% end %>
 <% end %>

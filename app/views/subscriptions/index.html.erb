@@ -1,4 +1,4 @@
-<h1>Minhas Inscrições</h1>
+<h1>Minhas Inscrições</h1><br/>
 
 <h3>Inscrições Ativas</h3>
 <% @subscriptions.each do |subscription| %>
@@ -6,6 +6,8 @@
     <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
   <% end %>
 <% end %>
+
+<br/>
 
 <h3>Inscrições Finalizadas</h3>
 <% @subscriptions.each do |subscription| %>

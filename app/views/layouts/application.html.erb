@@ -10,20 +10,23 @@
   </head>
 
   <body>
-    <% if headhunter_signed_in? %>
-      Logado como: Recrutador<br/>
-      Email: <%= current_headhunter.email %><br/>
+    <div class='container' >
+        <%= image_tag "logo.png", class:'img-fluid' %>
+    
+        <% if headhunter_signed_in? %>
+          <%= render "headhunters/shared/menu" %>
+          <b>Logado como:</b> Recrutador | <b>Email:</b> <%= current_headhunter.email %><br/>
 
-    <% elsif candidate_signed_in? %>
-      Logado como: Candidato<br/>
-      Email: <%= current_candidate.email %><br/>
+        <% elsif candidate_signed_in? %>
+          <%= render "candidates/shared/menu" %>
+          <b>Logado como:</b> Candidato | <b>Email:</b> <%= current_candidate.email %><br/>
 
-    <% else %>
-      Visitante
-    <% end %>
+        <% end %>    
 
-    <p class="notice"><%= notice %></p><br/>
-    <p class="alert"><%= alert %></p><br/>
-    <%= yield %><br/>
+      <p class="notice"><%= notice %></p><br/>
+      <p class="alert"><%= alert %></p><br/>
+      <%= yield %><br/>
+    
+    </div>
   </body>
 </html>

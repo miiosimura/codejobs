@@ -1,5 +1,5 @@
 <%= form_with url: job_subscriptions_path, local: true do |s| %>
   <%= s.label :about_candidate, 'Conte um pouco sobre você :)' %>
-  <%= s.text_area(:about_candidate, size: "24x6") %>
+  <%= s.text_area(:about_candidate, size: "24x3") %>
   <%= s.submit 'Salvar inscrição' %>
 <% end %>
