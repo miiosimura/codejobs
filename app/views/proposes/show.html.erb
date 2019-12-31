@@ -8,5 +8,5 @@
   <li><b>Bônus:</b> <%= @propose.bonus %></li>
 </ul>
 
-<%= link_to 'Aceitar Proposta', accept_subscription_propose_path, data: { confirm: "Tem certeza que deseja aceitar a proposta?" } %><br/>
-<%= link_to 'Recusar Proposta', edit_denial_subscription_propose_path(@propose.id) %><br/>
+<%= link_to 'Aceitar Proposta', accept_subscription_propose_path, data: { confirm: "Tem certeza que deseja aceitar a proposta?" }, class:"btn btn-primary" %>
+<%= link_to 'Recusar Proposta', edit_denial_subscription_propose_path(@propose.id), class:"btn btn-secondary" %>

@@ -13,36 +13,46 @@
 
 <% if headhunter_signed_in? %>
   <% if @propose && @propose.accepted == true %>
-    O Candidato aceitou sua proposta!<br/>
+    <div class="alert alert-success" role="alert">
+      O Candidato aceitou sua proposta!<br/>
+    </div>
 
   <% elsif @propose && @propose.accepted == false %>
-    O Candidato recusou sua proposta<br/>
-    Motivo: <%= @propose.denial_reason %>
+    <div class="alert alert-warning" role="alert">
+      O Candidato recusou sua proposta<br/>
+      Motivo: <%= @propose.denial_reason %>
+    </div>
 
   <% elsif @propose && @propose.accepted.nil? && @propose.subscription.job.status == 'active' %>
-    Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
+    <div class="alert alert-warning" role="alert">
+      Sua proposta foi enviada! Aguarde o retorno do Candidato<br/>
+    </div>
 
   <% elsif @propose && @propose.accepted.nil? && @propose.subscription.job.status == 'finished' %>
-    Você finalizou esta vaga antes do candidato enviar sua resposta à proposta
+    <div class="alert alert-dark" role="alert">
+      Você finalizou esta vaga antes do candidato enviar sua resposta à proposta
+    </div>
 
   <% elsif @propose.nil? && @subscription.job.status == 'finished' %>
-    Você recusou esta proposta ao finalizar esta vaga
+    <div class="alert alert-dark" role="alert">
+      Você recusou esta proposta ao finalizar esta vaga
+    </div>
 
   <% else %>
-    <%= link_to 'Enviar Proposta', new_subscription_propose_path(params[:subscription_id]) %><br/>
-    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(params[:subscription_id]) %><br/>
+    <%= link_to 'Enviar Proposta', new_subscription_propose_path(params[:subscription_id]), class:"btn btn-primary" %>
+    <%= link_to 'Recusar Inscrição', edit_denial_subscription_path(params[:subscription_id]), class:"btn btn-secondary" %>
   <% end %>
 
   <hr>
 
   <br/><br/>
 
-  <%= link_to 'Enviar Mensagem', new_candidate_messages_path(candidate_id: @candidate.id) %><br/>
+  <%= link_to 'Enviar Mensagem', new_candidate_messages_path(candidate_id: @candidate.id), class:"btn btn-primary" %><br/>
   <%= link_to 'Voltar', root_path %>
 
 <% elsif candidate_signed_in? %>
   <hr>
-  <%= link_to 'Editar Perfil', edit_candidate_path(current_candidate) %><br/>
+  <%= link_to 'Editar Perfil', edit_candidate_path(current_candidate), class:"btn btn-primary" %><br/>
   <%= link_to 'Voltar', root_path %>
 
 <% end %>

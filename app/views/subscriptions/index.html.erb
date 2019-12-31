@@ -2,20 +2,25 @@
 
 <% if @subscriptions.empty? %>
   Você ainda não tem nenhuma inscrição
+
 <% else %>
-  <h3>Inscrições Ativas</h3>
-  <% @subscriptions.each do |subscription| %>
-    <% if subscription.job.status == 'active' %>
-      <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
-    <% end %>
-  <% end %>
+  <div class="row">
+    <div class="col-6">
+      <h3>Inscrições Ativas</h3>
+      <% @subscriptions.each do |subscription| %>
+        <% if subscription.job.status == 'active' %>
+          <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
+        <% end %>
+      <% end %>
+    </div>
 
-  <br/>
-
-  <h3>Inscrições Finalizadas</h3>
-  <% @subscriptions.each do |subscription| %>
-    <% if subscription.job.status == 'finished' %>
-      <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
-    <% end %>
-  <% end %>
+    <div class="col-6">
+      <h3>Inscrições Finalizadas</h3>
+      <% @subscriptions.each do |subscription| %>
+        <% if subscription.job.status == 'finished' %>
+          <%= link_to subscription.job.title, job_path(subscription.job.id) %> <br/>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

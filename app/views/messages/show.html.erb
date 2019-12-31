@@ -17,9 +17,9 @@
 <hr>
 
 <% if headhunter_signed_in? %>
-  <%= link_to 'Enviar Nova Mensagem', new_candidate_messages_path(candidate_id: params[:candidate_id]) %><br/>
+  <%= link_to 'Enviar Nova Mensagem', new_candidate_messages_path(candidate_id: params[:candidate_id]), class:"btn btn-primary" %><br/>
 <% elsif candidate_signed_in? %>
-  <%= link_to 'Enviar Nova Mensagem', new_headhunter_messages_path(headhunter_id: params[:headhunter_id]) %><br/>
+  <%= link_to 'Enviar Nova Mensagem', new_headhunter_messages_path(headhunter_id: params[:headhunter_id]), class:"btn btn-primary" %><br/>
 <% end %>
 
 <%= link_to 'Voltar', root_path%>

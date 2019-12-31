@@ -65,7 +65,9 @@
     <%= link_to 'Editar Vaga', edit_job_path(@job), class:"btn btn-primary" %>
     <%= link_to 'Finalizar Vaga', chance_status_job_path(@job), class:"btn btn-secondary", data: { confirm: "Tem certeza que deseja finalizar esta vaga?" } %>
   <% else %>
-    Esta vaga foi finalizada
+    <div class="alert alert-dark" role="alert">
+      Esta vaga foi finalizada
+    </div>
   <% end %>
 
   <hr>
