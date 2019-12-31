@@ -10,7 +10,7 @@ class Job < ApplicationRecord
   enum status: [:active, :finished]
 
   def verify_valid_subscription_date
-    if subscription_date <= Date.today
+    if subscription_date <= Date.today || subscription_date >= Date.today + 1.years
       errors.add(:subscription_date, "inválida")
     end
   end

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   resources :messages, only: [:index]
 
-  resources :jobs, only: [:index, :show, :new, :create] do
+  resources :jobs, only: [:index, :show, :new, :create, :edit, :update] do
     get 'search', on: :collection
     get 'chance_status', on: :member
     resources :subscriptions, only: [:new, :create]

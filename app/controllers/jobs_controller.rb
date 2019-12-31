@@ -25,6 +25,21 @@ class JobsController < ApplicationController
     end
   end
 
+  def edit
+    @job = Job.find(params[:id])
+  end
+
+  def update
+    @job = Job.find(params[:id])
+
+    if @job.update(params.require(:job).permit(:title, :job_description, :skills_description, :salary_min, :salary_max, :job_level, :subscription_date, :city))
+      flash[:notice] = 'Vaga editada com sucesso!'
+      redirect_to @job
+    else
+      render :edit
+    end
+  end
+
   def search
     if params[:q].length > 1
       @jobs = Job.where('title like ?', "%#{params[:q]}%").where(status: 'active')

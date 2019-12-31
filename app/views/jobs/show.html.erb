@@ -1,4 +1,4 @@
-<h1><%= @job.title %></h1>
+<h1><%= @job.title %></h1><br/><br/>
 <p><b>Descrição: </b><%= @job.job_description %></p><br/>
 <p><b>Habilidades desejadas: </b><%= @job.skills_description %></p><br/>
 <p><b>Faixa Salarial: </b>De R$ <%= @job.salary_min %> até R$ <%= @job.salary_max %></p><br/>
@@ -13,64 +13,83 @@
 
   <% if current_candidate.verified_profile? %>
     <% if @propose && @propose.accepted %>
-      Você aceitou a Proposta! Parabéns pela nova contratação
+      <div class="alert alert-success" role="alert">
+        Você aceitou a Proposta! Parabéns pela nova contratação
+      </div>
 
     <% elsif @propose && @propose.accepted == false %>
-      Você recusou a Proposta
+      <div class="alert alert-warning" role="alert">
+        Você recusou a Proposta
+      </div>
 
     <% elsif @propose && @propose.accepted.nil? && @job.status == 'active' %>
-      Oba! O recrutador te enviou uma Proposta! :D<br/>
-      <%= link_to 'Ver Proposta', subscription_propose_path(@propose.subscription_id, @propose.id) %>
+      <div class="alert alert-warning" role="alert">
+        Oba! O recrutador te enviou uma Proposta! :D<br/>
+        <%= link_to 'Ver Proposta', subscription_propose_path(@propose.subscription_id, @propose.id) %>
+      </div>
 
     <% elsif @propose && @propose.accepted.nil? && @job.status == 'finished' %>
-      Que pena! Esta vaga foi finalizada.<br/>
+      <div class="alert alert-dark" role="alert">
+        Que pena! Esta vaga foi finalizada.<br/>
+      </div>
 
     <% elsif @subscription && @subscription.denial_reason.blank? && !@propose && @job.status == 'active' %>
-      Aguardando o retorno do Recrutador
+      <div class="alert alert-warning" role="alert">
+        Aguardando o retorno do Recrutador
+      </div>
 
     <% elsif @subscription && @subscription.denial_reason.blank? && !@propose && @job.status == 'finished' %>
-      Que pena! Esta vaga foi finalizada.<br/>
+      <div class="alert alert-dark" role="alert">
+        Que pena! Esta vaga foi finalizada.<br/>
+      </div>
       
     <% elsif @subscription && @subscription.denial_reason %>
-      <h3>Resposta do Recrutador:</h3>
-      <p><%= @subscription.denial_reason %></p>
+      <div class="alert alert-warning" role="alert">
+        <h4>Resposta do Recrutador:</h4><br/>
+        <p><%= @subscription.denial_reason %></p>
+      </div>
 
     <% else %>
-      <%= link_to 'Candidatar-se', new_job_subscription_path(@job) %><br/>
+      <%= link_to 'Candidatar-se', new_job_subscription_path(@job), class:"btn btn-primary" %><br/>
 
     <% end %>
 
   <% else %>
-    <%= link_to 'Candidatar-se', edit_candidate_path(current_candidate) %><br/>
+    <%= link_to 'Candidatar-se', edit_candidate_path(current_candidate), class:"btn btn-primary" %><br/>
 
   <% end %>
 <% end %>
 
 <% if headhunter_signed_in? %>
   <% if @job.status == 'active' %>
-    <%= link_to 'Finalizar Vaga', chance_status_job_path(@job), data: { confirm: "Tem certeza que deseja finalizar esta vaga?" } %>
+    <%= link_to 'Editar Vaga', edit_job_path(@job), class:"btn btn-primary" %>
+    <%= link_to 'Finalizar Vaga', chance_status_job_path(@job), class:"btn btn-secondary", data: { confirm: "Tem certeza que deseja finalizar esta vaga?" } %>
   <% else %>
     Esta vaga foi finalizada
   <% end %>
 
   <hr>
-  <%# <%= link_to 'Editar', edit_job_path %><br/>
+  
   <h2>Inscritos na vaga</h2><br/>
 
-  <% @job.subscriptions.each do |subscription| %>
+  <% if @job.subscriptions.empty? %>
+    Ainda não existem inscritos para essa vaga
+  <% else %>
+    <% @job.subscriptions.each do |subscription| %>
+      
+      <% if subscription.denial_reason.blank? %>
+        <b><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id, subscription_id: subscription.id) %></b>
+        <% if subscription.featured_profile %>
+          <%= link_to 'Em destaque', change_featured_profile_subscription_path(subscription), class:"btn btn-warning" %><br/>
+        <% else %>
+          <%= link_to 'Marcar como destaque', change_featured_profile_subscription_path(subscription), class:"btn btn-light" %><br/>
+        <% end %>
     
-    <% if subscription.denial_reason.blank? %>
-      <h3><%= link_to subscription.candidate.name, candidate_path(subscription.candidate_id, subscription_id: subscription.id) %></h3>
-      <% if subscription.featured_profile %>
-        <%= link_to 'Em destaque', change_featured_profile_subscription_path(subscription) %><br/>
-      <% else %>
-        <%= link_to 'Marcar como destaque', change_featured_profile_subscription_path(subscription) %><br/>
+        <b>Sobre o candidato:</b> <%= subscription.about_candidate %><br/>
       <% end %>
-  
-      <b>Sobre o candidato:</b> <%= subscription.about_candidate %><br/>
+      <br/>
     <% end %>
-    <br/>
-  <% end %>
+  <% end %>  
 <% end %>
 
 <br/><br/>

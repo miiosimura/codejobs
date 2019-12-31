@@ -29,14 +29,27 @@ feature 'Headhunter create a job' do
     expect(page).to have_link('Voltar')
   end
 
-  scenario 'and insert invalid subscription date' do
+  scenario 'and insert a subscription date less than or equal to today' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
     
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'
 
-    fill_in 'Data limite para inscrições', with: '2019-01-01'
+    fill_in 'Data limite para inscrições', with: Date.yesterday
+    click_on 'Cadastrar'
+
+    expect(page).to have_content('Subscription date inválida')
+  end
+
+  scenario 'and insert a subscription date greater than 1 year' do
+    headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
+    
+    login_as(headhunter, scope: :headhunter)
+    visit root_path
+    click_on 'Cadastrar Vaga'
+
+    fill_in 'Data limite para inscrições', with: Date.today + 1.years
     click_on 'Cadastrar'
 
     expect(page).to have_content('Subscription date inválida')

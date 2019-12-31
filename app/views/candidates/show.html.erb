@@ -1,4 +1,5 @@
-<h1><%= @candidate.name %></h1>
+<h1>Perfil</h1>
+<h3><%= @candidate.name %></h3><br/>
 <ul>
   <%= image_tag @candidate.photo, style: 'width: 150px;' if @candidate.photo.attached? %>
   <li><b>Email: </b><%= @candidate.email %></li>

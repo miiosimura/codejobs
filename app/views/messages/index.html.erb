@@ -1,15 +1,20 @@
-<% @messages.each do |message| %>
-  <% if headhunter_signed_in? %>
-    <h3>Usuario: <%= message.candidate.email %></h3>
-    <b>Ultima Mensagem:</b> <%= message.content %><br/><br/>
-    <b><%= link_to 'Ver tudo', candidate_messages_path(candidate_id: message.candidate_id) %></b>
-  
-  <% elsif candidate_signed_in? %>
-    <h3>Usuario: <%= message.headhunter.email %></h3>
-    <b>Ultima Mensagem:</b> <%= message.content %><br/><br/>
-    <b><%= link_to 'Ver tudo', headhunter_messages_path(headhunter_id: message.headhunter_id) %></b>
+<h1>Minhas Mensagens</h1><br/>
+
+<% if @messages.empty? %>
+  Sua caixa de mensagens está vazia
+<% else %>
+  <% @messages.each do |message| %>
+    <% if headhunter_signed_in? %>
+      <h3>Usuario: <%= message.candidate.email %></h3>
+      <b>Ultima Mensagem:</b> <%= message.content %><br/><br/>
+      <b><%= link_to 'Ver tudo', candidate_messages_path(candidate_id: message.candidate_id) %></b>
+    
+    <% elsif candidate_signed_in? %>
+      <h3>Usuario: <%= message.headhunter.email %></h3>
+      <b>Ultima Mensagem:</b> <%= message.content %><br/><br/>
+      <b><%= link_to 'Ver tudo', headhunter_messages_path(headhunter_id: message.headhunter_id) %></b>
+    <% end %>
+
+    <hr>
   <% end %>
-
-  <hr>
 <% end %>
-

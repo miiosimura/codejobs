@@ -1,21 +1,26 @@
-<%= link_to 'Cadastrar Nova Vaga', new_job_path, class:"btn btn-primary" %><br/><br/><br/>
+<h1>Minhas Vagas <span class="badge badge-secondary"><%= link_to 'Cadastrar Vaga', new_job_path, class: "text-white" %></span></h1><br/>
 
 <% if @jobs.empty? %>
   <p>Você ainda não cadastrou nenhuma vaga :(</p>
-<% end %>
 
-<h3>Vagas Ativas</h3>
-<% @jobs.each do |job| %>
-  <% if job.status == 'active' %>
-    <%= link_to job.title, job_path(job) %><br/>
-  <% end %>
-<% end %>
-
-<br/>
-
-<h3>Vagas Finalizadas</h3>
-<% @jobs.each do |job| %>
-  <% if job.status == 'finished' %>
-    <%= link_to job.title, job_path(job) %><br/>
-  <% end %>
+<% else %>
+  <div class="row">
+    <div class="col-6">
+      <h3>Vagas Ativas</h3>
+      <% @jobs.each do |job| %>
+        <% if job.status == 'active' %>
+          <%= link_to job.title, job_path(job) %><br/>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="col-6">
+      <h3>Vagas Finalizadas</h3>
+      <% @jobs.each do |job| %>
+        <% if job.status == 'finished' %>
+          <%= link_to job.title, job_path(job) %><br/>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

@@ -11,18 +11,16 @@
 
   <body>
     <div class='container' >
-        <%= image_tag "logo.png", class:'img-fluid' %>
-    
         <% if headhunter_signed_in? %>
           <%= render "headhunters/shared/menu" %>
-          <b>Logado como:</b> Recrutador | <b>Email:</b> <%= current_headhunter.email %><br/>
+          <p style='text-align: right;'><b>Logado como:</b> Recrutador | <b>Email:</b> <%= current_headhunter.email %></p><br/>
 
         <% elsif candidate_signed_in? %>
           <%= render "candidates/shared/menu" %>
-          <b>Logado como:</b> Candidato | <b>Email:</b> <%= current_candidate.email %><br/>
+          <p style='text-align: right;'><b>Logado como:</b> Candidato | <b>Email:</b> <%= current_candidate.email %></p><br/>
 
-        <% end %>    
-
+        <% end %>
+        
       <p class="notice"><%= notice %></p><br/>
       <p class="alert"><%= alert %></p><br/>
       <%= yield %><br/>
