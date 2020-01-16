@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_both!
+
   def index
     if headhunter_signed_in?
       @messages = Message.where(headhunter_id: current_headhunter.id).group(:candidate_id)
@@ -43,6 +45,16 @@ class MessagesController < ApplicationController
       else
         render :new
       end
+    end
+  end
+
+  private 
+  def authenticate_both!
+    if candidate_signed_in? || headhunter_signed_in?
+      true
+    else
+      flash[:alert] = 'Para essa ação, é necessário estar logado'
+      redirect_to root_path
     end
   end
 end

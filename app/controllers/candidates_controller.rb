@@ -1,4 +1,7 @@
 class CandidatesController < ApplicationController
+  before_action :authenticate_candidate!, except: [:show]
+  before_action :authenticate_both!, only: [:show]
+  
   def show
     @candidate = Candidate.find(params[:id])
     
@@ -18,6 +21,16 @@ class CandidatesController < ApplicationController
     else
       @candidate = current_candidate
       render :edit
+    end
+  end
+
+  private 
+  def authenticate_both!
+    if candidate_signed_in? || headhunter_signed_in?
+      true
+    else
+      flash[:alert] = 'Para essa ação, é necessário estar logado'
+      redirect_to root_path
     end
   end
 end

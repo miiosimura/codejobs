@@ -1,4 +1,8 @@
 class ProposesController < ApplicationController
+  before_action :authenticate_both!, only: [:show]
+  before_action :authenticate_headhunter!, only: [:new, :create]
+  before_action :authenticate_candidate!, only: [:accept, :edit_denial, :denial]
+  
   def show
     @propose = Propose.find(params[:id])
   end
@@ -44,6 +48,15 @@ class ProposesController < ApplicationController
       if !propose.nil?
         propose.update(accepted: false, denial_reason: 'Candidato aceitou outra proposta')
       end
+    end
+  end
+
+  def authenticate_both!
+    if candidate_signed_in? || headhunter_signed_in?
+      true
+    else
+      flash[:alert] = 'Para essa ação, é necessário estar logado'
+      redirect_to root_path
     end
   end
 end

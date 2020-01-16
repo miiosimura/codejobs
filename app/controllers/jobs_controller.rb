@@ -1,4 +1,8 @@
 class JobsController < ApplicationController
+  before_action :authenticate_both!, only: [:index, :show]
+  before_action :authenticate_headhunter!, only: [:new, :create, :edit, :update, :chance_status]
+  before_action :authenticate_candidate!, only: [:search]
+    
   def index
     @jobs = Job.where(headhunter_id: current_headhunter.id)
   end
@@ -55,5 +59,15 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.update(status: :finished)
     redirect_to job_path(@job)
+  end
+
+  private 
+  def authenticate_both!
+    if candidate_signed_in? || headhunter_signed_in?
+      true
+    else
+      flash[:alert] = 'Para essa ação, é necessário estar logado'
+      redirect_to root_path
+    end
   end
 end

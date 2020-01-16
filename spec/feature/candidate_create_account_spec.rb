@@ -35,4 +35,20 @@ feature 'Candidate create account' do
     expect(page).to have_content('1 error prohibited this candidate from being saved:')
     expect(page).to have_content('Email has already been taken')
   end
+
+  scenario ', is not logged in and wants to access Profile' do
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456')
+
+    visit candidate_path(candidate.id)
+
+    expect(page).to have_content('Para essa ação, é necessário estar logado')
+  end
+
+  scenario ', is not logged in and wants to access Edit Profile' do
+    candidate = Candidate.create!(email: 'candidate@email.com', password: '123456')
+
+    visit edit_candidate_path(candidate.id)
+
+    expect(page).to have_content('You need to sign in or sign up before continuing.')
+  end
 end

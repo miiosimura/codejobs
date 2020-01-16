@@ -1,4 +1,8 @@
 class SubscriptionsController < ApplicationController
+  before_action :authenticate_both!, only: [:index]
+  before_action :authenticate_candidate!, only: [:new, :create]
+  before_action :authenticate_headhunter!, only: [:change_featured_profile, :edit_denial, :denial]
+  
   def index
     @subscriptions = Subscription.where(candidate_id: current_candidate.id)
   end
@@ -40,5 +44,15 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     @subscription.update(params.permit(:denial_reason))
     redirect_to job_path(@subscription.job_id)
+  end
+
+  private 
+  def authenticate_both!
+    if candidate_signed_in? || headhunter_signed_in?
+      true
+    else
+      flash[:alert] = 'Para essa ação, é necessário estar logado'
+      redirect_to root_path
+    end
   end
 end
