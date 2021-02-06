@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Headhunter create a job' do
   scenario 'successfully' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'
@@ -14,7 +14,7 @@ feature 'Headhunter create a job' do
     fill_in 'Faixa Salarial de', with: '3000'
     fill_in 'até', with: '4000'
     select 'Junior', from: 'Nível da vaga'
-    fill_in 'Data limite para inscrições', with: '2020-01-25'
+    fill_in 'Data limite para inscrições', with: (Date.today + 1.month).to_s
     fill_in 'Região do local de Trabalho', with: 'Paulista'
     click_on 'Cadastrar'
 
@@ -24,14 +24,14 @@ feature 'Headhunter create a job' do
     expect(page).to have_content('Habilidades desejadas: Ruby, Ruby on Rails, HTML, Bootstrap')
     expect(page).to have_content('Faixa Salarial: De R$ 3000.0 até R$ 4000.0')
     expect(page).to have_content('Nivel: Junior')
-    expect(page).to have_content('Data limite para inscrições: 2020-01-25')
+    expect(page).to have_content("Data limite para inscrições: #{(Date.today + 1.month).to_s}")
     expect(page).to have_content('Local de Trabalho: Paulista')
     expect(page).to have_link('Voltar')
   end
 
   scenario 'and insert a subscription date less than or equal to today' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'
@@ -44,7 +44,7 @@ feature 'Headhunter create a job' do
 
   scenario 'and insert a subscription date greater than 1 year' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'
@@ -57,7 +57,7 @@ feature 'Headhunter create a job' do
 
   scenario 'and salary max is less than salary min' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'
@@ -71,7 +71,7 @@ feature 'Headhunter create a job' do
 
   scenario 'and some field went blank' do
     headhunter = Headhunter.create!(email: 'headhunter@email.com', password: '123456')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Cadastrar Vaga'

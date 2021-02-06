@@ -4,8 +4,8 @@ feature 'Candidate subscribe a job' do
   scenario 'successfully' do
     headhunter = Headhunter.create!(email: 'teste@email.com', password: '123456')
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
-    job = Job.create!(headhunter_id: headhunter.id, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-02-01', city: 'São Paulo', status: 'active')
-    
+    job = Job.create!(headhunter_id: headhunter.id, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 5.days, city: 'São Paulo', status: 'active')
+
     login_as(candidate, scope: :candidate)
     visit root_path
     fill_in 'Buscar Vagas', with: 'Ruby'
@@ -25,9 +25,9 @@ feature 'Candidate subscribe a job' do
   scenario 'and is already subscribed' do
     headhunter = Headhunter.create!(email: 'teste@email.com', password: '123456')
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
-    job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-02-01', city: 'São Paulo', status: 'active')
+    job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 5.days, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    
+
     login_as(candidate, scope: :candidate)
     visit subscriptions_path
     click_on 'Desenvolvedor Ruby Junior'
@@ -40,9 +40,9 @@ feature 'Candidate subscribe a job' do
   scenario 'and profile is not complete' do
     headhunter = Headhunter.create!(email: 'teste@email.com', password: '123456')
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456')
-    job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: '2020-02-01', city: 'São Paulo', status: 'active')
+    job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 5.days, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    
+
     login_as(candidate, scope: :candidate)
     visit root_path
     fill_in 'Buscar Vagas', with: 'Ruby'

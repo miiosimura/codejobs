@@ -13,7 +13,7 @@ feature 'Headhunter send propose to Candidate' do
     click_on job.title
     click_on candidate.name
     click_on 'Enviar Proposta'
-    fill_in 'Data de Inicio', with: '2020-02-02'
+    fill_in 'Data de Inicio', with: (Date.today + 1.month).to_s
     fill_in 'Salario', with: 3000.00
     fill_in 'Beneficios', with: 'VT, VR'
     fill_in 'Função', with: 'Desenvolvedor Ruby'
@@ -32,7 +32,7 @@ feature 'Headhunter send propose to Candidate' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 1.months, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    propose = Propose.create!(subscription_id: subscription.id, start_date: '2020-02-02', salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
+    propose = Propose.create!(subscription_id: subscription.id, start_date: (Date.today + 1.months), salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
 
     login_as(candidate, scope: :candidate)
     visit root_path
@@ -55,8 +55,8 @@ feature 'Headhunter send propose to Candidate' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 1.months, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    propose = Propose.create!(subscription_id: subscription.id, start_date: '2020-02-02', salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
-    
+    propose = Propose.create!(subscription_id: subscription.id, start_date: (Date.today + 1.months), salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
+
     login_as(candidate, scope: :candidate)
     visit subscriptions_path
     click_on job.title
@@ -74,8 +74,8 @@ feature 'Headhunter send propose to Candidate' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 1.months, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    propose = Propose.create!(subscription_id: subscription.id, start_date: '2020-02-02', salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
-    
+    propose = Propose.create!(subscription_id: subscription.id, start_date: (Date.today + 1.months), salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade')
+
     login_as(candidate, scope: :candidate)
     visit subscriptions_path
     click_on job.title
@@ -95,7 +95,7 @@ feature 'Headhunter send propose to Candidate' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 1.months, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    propose = Propose.create!(subscription_id: subscription.id, start_date: '2020-02-02', salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade', accepted: true)
+    propose = Propose.create!(subscription_id: subscription.id, start_date: (Date.today + 1.months), salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade', accepted: true)
 
     login_as(headhunter, scope: :headhunter)
     visit jobs_path
@@ -111,8 +111,8 @@ feature 'Headhunter send propose to Candidate' do
     candidate = Candidate.create!(email: 'candidate@email.com', password: '123456', name: 'Maria', birthday: '1999-05-05', scholarity: 'Tecnologo', work_experience: 'Empresa X', job_interest: 'Dev Junior')
     job = Job.create!(headhunter_id: 1, title: 'Desenvolvedor Ruby Junior', job_description: 'Descrição da vaga aqui', skills_description: 'Ruby, Ruby on Rails', salary_min: 2000.0, salary_max: 3000.0, job_level: 'Junior', subscription_date: Date.today + 1.months, city: 'São Paulo', status: 'active')
     subscription = Subscription.create!(job_id: job.id, candidate_id: candidate.id, about_candidate: 'Gosto de Programar')
-    propose = Propose.create!(subscription_id: subscription.id, start_date: '2020-02-02', salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade', accepted: false, denial_reason: 'Salario imcompativel')
-  
+    propose = Propose.create!(subscription_id: subscription.id, start_date: (Date.today + 1.months), salary: 3000.00, benefit: 'VT, VR', function: 'Desenvolvedor Junior', company_expectation: 'Ajudar na manutenção do site da empresa', bonus: 'Cafe a vontade', accepted: false, denial_reason: 'Salario imcompativel')
+
     login_as(headhunter, scope: :headhunter)
     visit jobs_path
     click_on job.title
@@ -168,6 +168,6 @@ feature 'Headhunter send propose to Candidate' do
 
     expect(page).to have_content('Start date deve estar em um período de 3 meses, a partir de hoje')
   end
-  
+
 
 end
